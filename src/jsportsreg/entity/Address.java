@@ -43,7 +43,7 @@ public class Address{
 	/** The county associated with the address.
 	 * 
 	 */
-	private String adressCounty;
+	private String addressCounty;
 
 	/** The person tied to this address.
 	 * 
@@ -57,7 +57,7 @@ public class Address{
 	}
 
 	/** Returns the addressID, the primary key, of the of address in the database.
-	 * @return
+	 * @return addressID		The primary key of the address record.
 	 */
 	public int getAddressID() {
 		return this.addressID;
@@ -71,7 +71,7 @@ public class Address{
 	}
 
 	/** Returns the city associated with the address.
-	 * @return
+	 * @return addressCity 		The city the address is associated with.
 	 */
 	public String getAddressCity() {
 		return this.addressCity;
@@ -85,7 +85,7 @@ public class Address{
 	}
 
 	/** Returns the zip or postal code associated with the address.
-	 * @return
+	 * @return addressPostalCode	String representing the zip or postal code.
 	 */
 	public String getAddressPostalCode() {
 		return this.addressPostalCode;
@@ -99,7 +99,7 @@ public class Address{
 	}
 
 	/** Returns the state associated with the address.
-	 * @return
+	 * @return addressState		The state associated with the address.
 	 */
 	public String getAddressState() {
 		return this.addressState;
@@ -113,7 +113,7 @@ public class Address{
 	}
 
 	/** Returns the street and number associated with the address.
-	 * @return
+	 * @return addressStreet	The number and street associated with the address.
 	 */
 	public String getAddressStreet() {
 		return this.addressStreet;
@@ -127,21 +127,21 @@ public class Address{
 	}
 
 	/** Returns the county associated with the address.
-	 * @return
+	 * @return address
 	 */
-	public String getAdressCounty() {
-		return this.adressCounty;
+	public String getAddressCounty() {
+		return this.addressCounty;
 	}
 
 	/** Sets the county associated with the address.
 	 * @param adressCounty
 	 */
 	public void setAdressCounty(String adressCounty) {
-		this.adressCounty = adressCounty;
+		this.addressCounty = adressCounty;
 	}
 
 	/** Returns the person associated with the address.
-	 * @return
+	 * @return person		The person this address is associated to.
 	 */
 	public Person getPerson() {
 		return this.person;

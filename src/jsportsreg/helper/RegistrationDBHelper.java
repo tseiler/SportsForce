@@ -41,6 +41,7 @@ public class RegistrationDBHelper {
 	private PreparedStatement updatePlayer_RegistrationStatentment;
 	
 	private int registrationID;
+	private Player_Registration player_registration;
 	
 	/**
 	 * 
@@ -107,7 +108,34 @@ public class RegistrationDBHelper {
 	
 	}
 	
+	/** Returns the registration ID to be displayed to the registrant on the Thank You page.
+	 * @return
+	 */
+	public int getRegistrationID(){
+		return this.registrationID;
+	}
 	
+	/** Sets the registration ID variable to populate a Player Registration object
+	 * @param registrationID
+	 */
+	public void setRegistrationID(int registrationID){
+		this.registrationID = registrationID;
+	}
+	
+	/** Returns the player registration object associated with the registrationID.
+	 * @return
+	 */
+	public Player_Registration getPlayer_Registration(){
+		return this.player_registration;
+	}
+	
+	/** Sets the player_registration variable and writes the object to the database.  It also writes the value of the primary key (through 
+	 * addPlayer_Registration) to the registration ID value to be display to the registrant on the Thank You page.
+	 * @param player_registration		Player_Registration object fully populated.
+	 */
+	public void setPlayer_Registration(Player_Registration player_registration){
+		this.addPlayer_Registration(player_registration);
+	}
 	
 	
 }

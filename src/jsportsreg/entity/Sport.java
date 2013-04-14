@@ -102,7 +102,7 @@ public class Sport{
 	}
 
 	/** Returns the list of divisions associated with the sport.
-	 * @return
+	 * @return divisions		List of divisions associated with the sport.
 	 */
 	public List<Division> getDivisions() {
 		return this.divisions;
@@ -117,7 +117,7 @@ public class Sport{
 
 	/**  Adds a division to the list of divisions associated with the sport.
 	 * @param division
-	 * @return
+	 * @return division
 	 */
 	public Division addDivision(Division division) {
 		getDivisions().add(division);
@@ -128,7 +128,7 @@ public class Sport{
 
 	/** Removes a division to the list of divisions associated with the sport.
 	 * @param division
-	 * @return
+	 * @return division
 	 */
 	public Division removeDivision(Division division) {
 		getDivisions().remove(division);
