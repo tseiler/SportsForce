@@ -7,33 +7,65 @@
  */
 
 
-package jsportsreg;
+package jsportsreg.entity;
 
 
+/** Address Class for different address tied to people.
+ * @author tseiler
+ *
+ */
 public class Address{
 
+	/** The primary key tied to a specific address.
+	 * 
+	 */
 	private int addressID;
+	
+	/** The city tied to the address.
+	 * 
+	 */
 	private String addressCity;
-
+	/** The postal or zip code tied to the address.
+	 * 
+	 */
 	private String addressPostalCode;
 
+	/** The state associated with the address.
+	 * 
+	 */
 	private String addressState;
 
+	/** The street specification associated with the address.
+	 * 
+	 */
 	private String addressStreet;
 
+	/** The county associated with the address.
+	 * 
+	 */
 	private String adressCounty;
 
-	//bi-directional many-to-one association to People
+	/** The person tied to this address.
+	 * 
+	 */
+	private Person person;
 
-	private People people;
-
+	/** General constructor creating an empty Address object.
+	 * 
+	 */
 	public Address() {
 	}
 
+	/** Returns the addressID, the primary key, of the of address in the database.
+	 * @return
+	 */
 	public int getAddressID() {
 		return this.addressID;
 	}
 
+	/** Sets the addressID, the primary key, of the address in the database.
+	 * @param addressID
+	 */
 	public void setAddressID(int addressID) {
 		this.addressID = addressID;
 	}
@@ -78,11 +110,11 @@ public class Address{
 		this.adressCounty = adressCounty;
 	}
 
-	public People getPeople() {
+	public Person getPeople() {
 		return this.people;
 	}
 
-	public void setPeople(People people) {
+	public void setPeople(Person people) {
 		this.people = people;
 	}
 

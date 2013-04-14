@@ -6,7 +6,7 @@
  *
  */
 
-package jsportsreg;
+package jsportsreg.entity;
 
 import java.util.List;
 
