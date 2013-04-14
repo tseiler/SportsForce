@@ -137,5 +137,11 @@ public class RegistrationDBHelper {
 		this.addPlayer_Registration(player_registration);
 	}
 	
-	
+	/** Returns a list of Divisions available to be displayed in the form.
+	 * @return divisions		List of divisions, which encompass all sports and seasons availab.e 
+	 */
+	public ArrayList<Division> getDivisions(){
+		ArrayList<Division> divisions = new ArrayList<Division>();
+		return divisions;
+	}
 }

@@ -54,6 +54,52 @@ public class Address{
 	 * 
 	 */
 	public Address() {
+		this.addressID = -1;
+		this.addressStreet = "";
+		this.addressCity = "";
+		this.addressCounty = "";
+		this.addressPostalCode = "";
+		this.addressState = "";
+		this.person = null;
+	}
+
+	/** Constructor to provide fully populated address
+	 * @param addressID
+	 * @param addressCity
+	 * @param addressPostalCode
+	 * @param addressState
+	 * @param addressStreet
+	 * @param addressCounty
+	 * @param person
+	 */
+	public Address(int addressID, String addressStreet, String addressCity, String addressState, 
+			String addressPostalCode, String addressCounty, Person person) {
+		this.addressID = addressID;
+		this.addressCity = addressCity;
+		this.addressPostalCode = addressPostalCode;
+		this.addressState = addressState;
+		this.addressStreet = addressStreet;
+		this.addressCounty = addressCounty;
+		this.person = person;
+	}
+
+	/** Constructor to provide fully populated address without an ID.
+	 * @param addressCity
+	 * @param addressPostalCode
+	 * @param addressState
+	 * @param addressStreet
+	 * @param addressCounty
+	 * @param person
+	 */
+	protected Address(String addressStreet, String addressCity, String addressState, 
+			String addressPostalCode, String addressCounty, Person person) {
+		this.addressCity = addressCity;
+		this.addressPostalCode = addressPostalCode;
+		this.addressState = addressState;
+		this.addressStreet = addressStreet;
+		this.addressCounty = addressCounty;
+		this.person = person;
+		this.addressID = -1;
 	}
 
 	/** Returns the addressID, the primary key, of the of address in the database.

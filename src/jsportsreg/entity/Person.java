@@ -8,8 +8,11 @@
 
 package jsportsreg.entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 
 /**
@@ -104,9 +107,28 @@ public class Person {
 	 * Empty Person constructor to create blank object.
 	 */
 	public Person() {
+		this.personID = -1;
+		this.firstName = "";
+		this.lastName = "";
+		this.middleName = "";
+		this.nickName = "";
+		this.suffixName = "";
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+		try{
+			this.birthDate = df.parse("01-01-1900");
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		this.emailAddress = "";
+		this.gender = "";
+		this.role = "";
+		this.homePhone = "";
+		this.workPhone = "";
+		this.mobilePhone = "";
+		this.addresses = new ArrayList<Address>();
+		this.emergencyContacts = new ArrayList<Person>();
+		this.playerRegistrations = new ArrayList<Player_Registration>();
 	}
-
-	
 	
 	/***
 	 * Person constructor to create a Person object fully populated.  Will be called
