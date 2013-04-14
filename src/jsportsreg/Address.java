@@ -1,19 +1,18 @@
+/**
+ * Travis D. Seiler
+ * MIST 7570, Spring 2013
+ * Dr. Dan Everett
+ * @author tseiler
+ *
+ */
+
+
 package jsportsreg;
 
 
-
-/**
- * The persistent class for the Addresses database table.
- * 
- */
-
 public class Address{
-	private static final long serialVersionUID = 1L;
-
 
 	private int addressID;
-
-
 	private String addressCity;
 
 	private String addressPostalCode;

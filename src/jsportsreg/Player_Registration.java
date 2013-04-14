@@ -1,7 +1,13 @@
+/**
+ * Travis D. Seiler
+ * MIST 7570, Spring 2013
+ * Dr. Dan Everett
+ * @author tseiler
+ *
+ */
+
 package jsportsreg;
 
-import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
 
 
@@ -9,102 +15,72 @@ import java.math.BigDecimal;
  * The persistent class for the Player_Registration database table.
  * 
  */
-@Entity
-public class Player_Registration implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
+public class Player_Registration{
+
 	private int registrationID;
 
-	@Column(name="additional_position")
 	private String additionalPosition;
 
 	private BigDecimal balance;
 
-	@Column(name="base_fee")
 	private BigDecimal baseFee;
 
-	@Column(name="by_laws_agreement")
 	private byte byLawsAgreement;
 
-	@Column(name="catching_experience")
 	private byte catchingExperience;
 
-	@Column(name="catching_gear")
 	private byte catchingGear;
 
-	@Column(name="code_of_conduct")
 	private byte codeOfConduct;
 
 	private BigDecimal discount;
 
 	private BigDecimal donation;
 
-	@Column(name="fundraising_fee")
 	private BigDecimal fundraisingFee;
 
-	@Column(name="hat_size")
 	private String hatSize;
 
-	@Column(name="jersey_1")
 	private BigDecimal jersey1;
 
-	@Column(name="jersey_2")
 	private BigDecimal jersey2;
 
-	@Column(name="jersey_size")
 	private String jerseySize;
 
-	@Column(name="late_fee")
 	private BigDecimal lateFee;
 
-	@Column(name="liability_waiver")
 	private byte liabilityWaiver;
 
-	@Column(name="out_of_county_fee")
 	private BigDecimal outOfCountyFee;
 
-	@Column(name="pant_size")
 	private String pantSize;
 
-	@Column(name="photo_waiver")
 	private byte photoWaiver;
 
-	@Column(name="pitching_experience")
 	private byte pitchingExperience;
 
-	@Column(name="primary_position")
 	private String primaryPosition;
 
-	@Column(name="refund_amount")
 	private BigDecimal refundAmount;
 
-	@Column(name="refund_policy")
 	private byte refundPolicy;
 
-	@Column(name="seasons_playeed")
 	private BigDecimal seasonsPlayeed;
 
-	@Column(name="secondary_position")
 	private String secondaryPosition;
 
-	@Column(name="socks_size")
 	private String socksSize;
 
-	@Column(name="total_fees")
 	private BigDecimal totalFees;
 
-	@Column(name="uniform_camp_fee")
 	private BigDecimal uniformCampFee;
 
 	//bi-directional many-to-one association to Division
-	@ManyToOne
-	@JoinColumn(name="divisionID")
+
 	private Division division;
 
 	//bi-directional many-to-one association to People
-	@ManyToOne
-	@JoinColumn(name="personID")
 	private People people;
 
 	public Player_Registration() {

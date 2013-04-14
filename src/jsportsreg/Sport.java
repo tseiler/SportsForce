@@ -1,7 +1,13 @@
+/**
+ * Travis D. Seiler
+ * MIST 7570, Spring 2013
+ * Dr. Dan Everett
+ * @author tseiler
+ *
+ */
+
 package jsportsreg;
 
-import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
 
@@ -10,8 +16,8 @@ import java.util.List;
  * 
  */
 
-public class Sport implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Sport{
+
 
 	private int sportID;
 

@@ -1,3 +1,11 @@
+/**
+ * Travis D. Seiler
+ * MIST 7570, Spring 2013
+ * Dr. Dan Everett
+ * @author tseiler
+ *
+ */
+
 package jsportsreg;
 
 import java.util.Date;

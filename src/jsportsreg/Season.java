@@ -1,7 +1,13 @@
+/**
+ * Travis D. Seiler
+ * MIST 7570, Spring 2013
+ * Dr. Dan Everett
+ * @author tseiler
+ *
+ */
+
 package jsportsreg;
 
-import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -10,23 +16,17 @@ import java.util.List;
  * The persistent class for the Season database table.
  * 
  */
-@Entity
-public class Season implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
+public class Season{
 	private int seasonID;
 
-	@Temporal(TemporalType.DATE)
 	private Date seasonEndDate;
 
 	private String seasonName;
-
-	@Temporal(TemporalType.DATE)
+	
 	private Date seasonStartDate;
 
 	//bi-directional many-to-one association to Division
-	@OneToMany(mappedBy="season")
 	private List<Division> divisions;
 
 	public Season() {
