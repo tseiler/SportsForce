@@ -13,13 +13,20 @@ import java.util.List;
 
 
 /**
- * The persistent class for the Season database table.
+ * The class Season database table.
  * 
  */
 
 public class Season{
+	
+	/** Primary key for the Season table in the database, season identifier.
+	 * 
+	 */
 	private int seasonID;
 
+	/** the 
+	 * 
+	 */
 	private Date seasonEndDate;
 
 	private String seasonName;

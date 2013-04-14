@@ -385,7 +385,7 @@ public class Person {
 	 */
 	public Address addAddress(Address address) {
 		getAddresses().add(address);
-		address.setPeople(this);
+		address.setPerson(this);
 
 		return address;
 	}
@@ -396,7 +396,7 @@ public class Person {
 	 */
 	public Address removeAddress(Address address) {
 		getAddresses().remove(address);
-		address.setPeople(null);
+		address.setPerson(null);
 
 		return address;
 	}

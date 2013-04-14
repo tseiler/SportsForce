@@ -70,52 +70,87 @@ public class Address{
 		this.addressID = addressID;
 	}
 
+	/** Returns the city associated with the address.
+	 * @return
+	 */
 	public String getAddressCity() {
 		return this.addressCity;
 	}
 
+	/** Sets the city associated with the address.
+	 * @param addressCity
+	 */
 	public void setAddressCity(String addressCity) {
 		this.addressCity = addressCity;
 	}
 
+	/** Returns the zip or postal code associated with the address.
+	 * @return
+	 */
 	public String getAddressPostalCode() {
 		return this.addressPostalCode;
 	}
 
+	/** Sets the zip or postal code associated with the address.
+	 * @param addressPostalCode
+	 */
 	public void setAddressPostalCode(String addressPostalCode) {
 		this.addressPostalCode = addressPostalCode;
 	}
 
+	/** Returns the state associated with the address.
+	 * @return
+	 */
 	public String getAddressState() {
 		return this.addressState;
 	}
 
+	/** Sets the state associated with the address.
+	 * @param addressState
+	 */
 	public void setAddressState(String addressState) {
 		this.addressState = addressState;
 	}
 
+	/** Returns the street and number associated with the address.
+	 * @return
+	 */
 	public String getAddressStreet() {
 		return this.addressStreet;
 	}
 
+	/** Sets the street and number associated to the address.
+	 * @param addressStreet
+	 */
 	public void setAddressStreet(String addressStreet) {
 		this.addressStreet = addressStreet;
 	}
 
+	/** Returns the county associated with the address.
+	 * @return
+	 */
 	public String getAdressCounty() {
 		return this.adressCounty;
 	}
 
+	/** Sets the county associated with the address.
+	 * @param adressCounty
+	 */
 	public void setAdressCounty(String adressCounty) {
 		this.adressCounty = adressCounty;
 	}
 
-	public Person getPeople() {
-		return this.people;
+	/** Returns the person associated with the address.
+	 * @return
+	 */
+	public Person getPerson() {
+		return this.person;
 	}
 
-	public void setPeople(Person people) {
-		this.people = people;
+	/** Sets the person associated with the address.
+	 * @param person
+	 */
+	public void setPerson(Person person) {
+		this.person = person;
 	}
-
 }
