@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import jsportsreg.entity.*;
 
 
-/**
+/** This class is designed to handle all updates to the all member objects that are associated with a Player Registration.  This class
+ * only takes the registration ID and will pull all corresponding data.  This class should only be used as a bean when pre-populating a 
+ * registration form, otherwise the Registration Controller should send a new Player_Registration object. 
  * @author tseiler
  *
  */
