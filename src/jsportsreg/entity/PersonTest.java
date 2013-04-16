@@ -64,22 +64,49 @@ public class PersonTest {
 		instance0.setSuffixName("");
 		instance0.setNickName("Zander");
 		Date dateTest2 = df.parse("10-3-2010");
+		instance0.setBirthDate(dateTest2);
+		instance0.setGender("Male");
+		instance0.setRole("Player");
+		instance0.setWorkPhone("404-555-1234");
+		instance0.setHomePhone("404-555-9876");
+		instance0.setMobilePhone("404-555-4321");
+		instance0.setPersonID(2010);
 		
-		assertEquals("Person Test 3: First Name", "Travis", instance0.getFirstName());
+		ArrayList<Address> aList = new ArrayList<Address>();
+		Address addr1 = new Address();
+		Address addr2 = new Address();
+		aList.add(addr1);
+		aList.add(addr2);
+		
+		instance0.setAddresses(aList);
+
+		ArrayList<Player_Registration> pList = new ArrayList<Player_Registration>();
+		Player_Registration pr0 = new Player_Registration();
+		pList.add(pr0);
+		
+		instance0.setPlayerRegistrations(pList);
+		
+		ArrayList<Person> ecList = new ArrayList<Person>();
+		ecList.add(instance1);
+		
+		instance0.setEmergencyContacts(ecList);
+		
+		
+		assertEquals("Person Test 3: First Name", "Alexzander", instance0.getFirstName());
 		assertEquals("Person Test 3: Last Name", "Seiler", instance0.getLastName());
-		assertEquals("Person Test 3: Middle Name", "David", instance0.getMiddleName() );
-		assertEquals("Person Test 3: Nick Name", "T-Rex", instance0.getNickName() );
+		assertEquals("Person Test 3: Middle Name", "Edward", instance0.getMiddleName() );
+		assertEquals("Person Test 3: Nick Name", "Zander", instance0.getNickName() );
 		assertEquals("Person Test 3: Suffix Name", "", instance0.getSuffixName() );
-		assertEquals("Person Test 3: Home Phone Number", "404-759-0121", instance0.getHomePhone() );
-		assertEquals("Person Test 3: Mobile Phone Number", "404-890-0006", instance0.getMobilePhone() );
-		assertEquals("Person Test 3: Work Phone Number", "770-555-9999", instance0.getWorkPhone() );
-		assertEquals("Person Test 3: Birth Date", dateTest1, instance0.getBirthDate() );
+		assertEquals("Person Test 3: Home Phone Number", "404-555-9876", instance0.getHomePhone() );
+		assertEquals("Person Test 3: Mobile Phone Number", "404-555-4321", instance0.getMobilePhone() );
+		assertEquals("Person Test 3: Work Phone Number", "404-555-1234", instance0.getWorkPhone() );
+		assertEquals("Person Test 3: Birth Date", dateTest2, instance0.getBirthDate() );
 		assertEquals("Person Test 3: Gender", "Male", instance0.getGender() );
-		assertEquals("Person Test 3: Role", "Parent/Guardian", instance0.getRole() );
-		assertEquals("Person Test 3: Person ID", 21, instance0.getPersonID() );
-		assertEquals("Person Test 3: Player Registrations", true, instance0.getPlayerRegistrations().isEmpty() );
-		assertEquals("Person Test 3: Addresses", true, instance0.getAddresses().isEmpty() );
-		assertEquals("Person Test 3: Emergency Contacts", true, instance0.getEmergencyContacts().isEmpty() );
+		assertEquals("Person Test 3: Role", "Player", instance0.getRole() );
+		assertEquals("Person Test 3: Person ID", 2010, instance0.getPersonID() );
+		assertEquals("Person Test 3: Player Registrations", 1, instance0.getPlayerRegistrations().size() );
+		assertEquals("Person Test 3: Addresses", 2, instance0.getAddresses().size() );
+		assertEquals("Person Test 3: Emergency Contacts", 1, instance0.getEmergencyContacts().size() );
 	}
 
 }

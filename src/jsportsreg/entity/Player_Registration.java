@@ -8,7 +8,6 @@
 
 package jsportsreg.entity;
 
-import java.math.BigDecimal;
 
 
 /**
@@ -20,22 +19,7 @@ import java.math.BigDecimal;
  * @author tseiler
  *
  */
-/**
- * @author tseiler
- *
- */
-/**
- * @author tseiler
- *
- */
-/**
- * @author tseiler
- *
- */
-/**
- * @author tseiler
- *
- */
+
 public class Player_Registration{
 
 	
@@ -52,12 +36,12 @@ public class Player_Registration{
 	/**
 	 * The balance owed related to this Player Registration object.
 	 */
-	private BigDecimal balance;
+	private double balance;
 
 	/**
 	 * The base fee related to this Player Registration.
 	 */
-	private BigDecimal baseFee;
+	private double baseFee;
 
 	/**
 	 * Whether the By Laws have been agreed to.
@@ -82,17 +66,17 @@ public class Player_Registration{
 	/**
 	 * A field specifying a discount associated to the player registration. 
 	 */
-	private BigDecimal discount;
+	private double discount;
 
 	/**
 	 * A field specifying a donation associated with the player registration. 
 	 */
-	private BigDecimal donation;
+	private double donation;
 
 	/**
 	 * The fundraising fee associated with the player registration.
 	 */
-	private BigDecimal fundraisingFee;
+	private double fundraisingFee;
 
 	/**
 	 * The hat size of the person associated with the player registration.
@@ -102,12 +86,12 @@ public class Player_Registration{
 	/**
 	 * The preferred jersey number associated with the player registration.
 	 */
-	private BigDecimal jersey1;
+	private int jersey1;
 
 	/**
 	 * The secondary preferred jersey number associated with the player registration. 
 	 */
-	private BigDecimal jersey2;
+	private int jersey2;
 
 	/**
 	 * The Jersey size associated with the player registration. 
@@ -117,17 +101,17 @@ public class Player_Registration{
 	/**
 	 * A field denoting a late fee associated with the player registration. 
 	 */
-	private BigDecimal lateFee;
+	private double lateFee;
 
 	/**
 	 * A field specifying whether the liability waiver has been accepted. 
 	 */
-	private byte liabilityWaiver;
+	private boolean liabilityWaiver;
 
 	/**
 	 * A fee related to whether the person associated with the player registration resides outside of the county. 
 	 */
-	private BigDecimal outOfCountyFee;
+	private double outOfCountyFee;
 
 	/**
 	 * A field specifying the pant size of the person associated with the player registration.
@@ -137,12 +121,12 @@ public class Player_Registration{
 	/**
 	 * A field denoting whether the photo waiver has been accepted. 
 	 */
-	private byte photoWaiver;
+	private boolean photoWaiver;
 
 	/**
 	 * A field which specifies if the Person associated with the player registration has pitching experience. 
 	 */
-	private byte pitchingExperience;
+	private boolean pitchingExperience;
 
 	/**
 	 * A field which denotes the primary position the player prefers.
@@ -152,17 +136,17 @@ public class Player_Registration{
 	/**
 	 * A field specifying the amount of a refund.
 	 */
-	private BigDecimal refundAmount;
+	private double refundAmount;
 
 	/**
 	 * A field which specifies if the player has accepted the refund policy.
 	 */
-	private byte refundPolicy;
+	private boolean refundPolicy;
 
 	/**
 	 * A field denoting how many seasons a player has participated. 
 	 */
-	private BigDecimal seasonsPlayeed;
+	private int seasonsPlayed;
 
 	/**
 	 * A field which specifies the secondary position a player would prefer to play. 
@@ -177,18 +161,17 @@ public class Player_Registration{
 	/**
 	 * A field specifying the total fees due per the player registration. 
 	 */
-	private BigDecimal totalFees;
+	private double totalFees;
 
 	/**
 	 * A field denoting the uniform or camp fees associated with the player registration. 
 	 */
-	private BigDecimal uniformCampFee;
+	private double uniformCampFee;
 
 	/**
 	 * A field specifying the division the player registration is tied to. 
 	 */
 	private Division division;
-
 	
 	/**
 	 * The person associated with the player registration (The player).  
@@ -199,6 +182,38 @@ public class Player_Registration{
 	 * Constructor to create an empty player registration object.
 	 */
 	public Player_Registration() {
+		
+		this.registrationID = -1;
+		this.additionalPosition = "";
+		this.balance = 0.00;
+		this.baseFee = 0.00;
+		this.byLawsAgreement = false;
+		this.catchingExperience = false;
+		this.catchingGear = false;
+		this.codeOfConduct = false;
+		this.discount = 0.00;
+		this.donation = 0.00;
+		this.fundraisingFee = 0.00;
+		this.hatSize = "";
+		this.jersey1 = -1;
+		this.jersey2 = -1;
+		this.jerseySize = "";
+		this.lateFee = 0.00;
+		this.liabilityWaiver = false;
+		this.outOfCountyFee = 0.00;
+		this.pantSize = "";
+		this.photoWaiver = false;
+		this.pitchingExperience = false;
+		this.primaryPosition = "";
+		this.refundAmount = 0.00;
+		this.refundPolicy = false;
+		this.seasonsPlayed = -1;
+		this.secondaryPosition = "";
+		this.socksSize = "";
+		this.totalFees = 0.00;
+		this.uniformCampFee = 0.00;
+		this.division = new Division();
+		this.person = new Person();
 	}
 	
 	/**
@@ -227,7 +242,7 @@ public class Player_Registration{
 	 * @param primaryPosition
 	 * @param refundAmount
 	 * @param refundPolicy
-	 * @param seasonsPlayeed
+	 * @param seasonsPlayed
 	 * @param secondaryPosition
 	 * @param socksSize
 	 * @param totalFees
@@ -236,16 +251,16 @@ public class Player_Registration{
 	 * @param person
 	 */
 	public Player_Registration(int registrationID, String additionalPosition,
-			BigDecimal balance, BigDecimal baseFee, boolean byLawsAgreement,
+			double balance, double baseFee, boolean byLawsAgreement,
 			boolean catchingExperience, boolean catchingGear,
-			boolean codeOfConduct, BigDecimal discount, BigDecimal donation,
-			BigDecimal fundraisingFee, String hatSize, BigDecimal jersey1,
-			BigDecimal jersey2, String jerseySize, BigDecimal lateFee,
-			byte liabilityWaiver, BigDecimal outOfCountyFee, String pantSize,
-			byte photoWaiver, byte pitchingExperience, String primaryPosition,
-			BigDecimal refundAmount, byte refundPolicy,
-			BigDecimal seasonsPlayeed, String secondaryPosition,
-			String socksSize, BigDecimal totalFees, BigDecimal uniformCampFee,
+			boolean codeOfConduct, double discount, double donation,
+			double fundraisingFee, String hatSize, int jersey1,
+			int jersey2, String jerseySize, double lateFee,
+			boolean liabilityWaiver, double outOfCountyFee, String pantSize,
+			boolean photoWaiver, boolean pitchingExperience, String primaryPosition,
+			double refundAmount, boolean refundPolicy,
+			int seasonsPlayed, String secondaryPosition,
+			String socksSize, double totalFees, double uniformCampFee,
 			Division division, Person person) {
 		this.registrationID = registrationID;
 		this.additionalPosition = additionalPosition;
@@ -271,7 +286,7 @@ public class Player_Registration{
 		this.primaryPosition = primaryPosition;
 		this.refundAmount = refundAmount;
 		this.refundPolicy = refundPolicy;
-		this.seasonsPlayeed = seasonsPlayeed;
+		this.seasonsPlayed = seasonsPlayed;
 		this.secondaryPosition = secondaryPosition;
 		this.socksSize = socksSize;
 		this.totalFees = totalFees;
@@ -316,7 +331,7 @@ public class Player_Registration{
 	 * Returns the balance owed due to the player registration.
 	 * @return balance		The amount owed.
 	 */
-	public BigDecimal getBalance() {
+	public double getBalance() {
 		return this.balance;
 	}
 
@@ -324,7 +339,7 @@ public class Player_Registration{
 	 * Sets the balance owed due to the player registration.
 	 * @param balance		The amount owed.
 	 */
-	public void setBalance(BigDecimal balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 
@@ -332,7 +347,7 @@ public class Player_Registration{
 	 * Returns the base fees associated to the player registration.
 	 * @return baseFee		The base fee amount.
 	 */
-	public BigDecimal getBaseFee() {
+	public double getBaseFee() {
 		return this.baseFee;
 	}
 
@@ -340,7 +355,7 @@ public class Player_Registration{
 	 * Sets the base fees associated with the player registration.
 	 * @param baseFee		The base fee amount.
 	 */
-	public void setBaseFee(BigDecimal baseFee) {
+	public void setBaseFee(double baseFee) {
 		this.baseFee = baseFee;
 	}
 
@@ -413,7 +428,7 @@ public class Player_Registration{
 	 * Returns the discount associated with the player registration
 	 * @return discount			Currency amount associated with the discount of the player registration.
 	 */
-	public BigDecimal getDiscount() {
+	public double getDiscount() {
 		return this.discount;
 	}
 
@@ -421,7 +436,7 @@ public class Player_Registration{
 	 * Sets the discount amount.
 	 * @param discount			Currency amount associated with the discount of the player registration.
 	 */
-	public void setDiscount(BigDecimal discount) {
+	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
 
@@ -429,7 +444,7 @@ public class Player_Registration{
 	 * Returns the donation amount associated with the player registration. 
 	 * @return donation			A currency amount associated with the player registration
 	 */
-	public BigDecimal getDonation() {
+	public double getDonation() {
 		return this.donation;
 	}
 
@@ -437,7 +452,7 @@ public class Player_Registration{
 	 * Sets the donation amount
 	 * @param donation		A currency amount associated with the player registration
 	 */
-	public void setDonation(BigDecimal donation) {
+	public void setDonation(double donation) {
 		this.donation = donation;
 	}
 
@@ -445,7 +460,7 @@ public class Player_Registration{
 	 * Returns the Fund Raising Fee
 	 * @return fundraisingFee	A currency amount denoting the fundraising fee.
 	 */
-	public BigDecimal getFundraisingFee() {
+	public double getFundraisingFee() {
 		return this.fundraisingFee;
 	}
 
@@ -453,7 +468,7 @@ public class Player_Registration{
 	 * Sets the Fund Raising Fee.
 	 * @param fundraisingFee	A currency amount denoting the fundraising fee.
 	 */
-	public void setFundraisingFee(BigDecimal fundraisingFee) {
+	public void setFundraisingFee(double fundraisingFee) {
 		this.fundraisingFee = fundraisingFee;
 	}
 
@@ -476,28 +491,28 @@ public class Player_Registration{
 	/** Returns the players preferred jersey number.
 	 * @return
 	 */
-	public BigDecimal getJersey1() {
+	public int getJersey1() {
 		return this.jersey1;
 	}
 
 	/** Sets the players preferred jersey number.
 	 * @param jersey1
 	 */
-	public void setJersey1(BigDecimal jersey1) {
+	public void setJersey1(int jersey1) {
 		this.jersey1 = jersey1;
 	}
 
 	/** Returns the players secondary preferred jersey number.
 	 * @return
 	 */
-	public BigDecimal getJersey2() {
+	public int getJersey2() {
 		return this.jersey2;
 	}
 
 	/** Sets the players secondary preferred jersey number.
 	 * @param jersey2
 	 */
-	public void setJersey2(BigDecimal jersey2) {
+	public void setJersey2(int jersey2) {
 		this.jersey2 = jersey2;
 	}
 
@@ -518,42 +533,42 @@ public class Player_Registration{
 	/** Returns the late fee associated with the player registration.
 	 * @return
 	 */
-	public BigDecimal getLateFee() {
+	public double getLateFee() {
 		return this.lateFee;
 	}
 
 	/** Sets the late fee associated with the player registration.
 	 * @param lateFee
 	 */
-	public void setLateFee(BigDecimal lateFee) {
+	public void setLateFee(double lateFee) {
 		this.lateFee = lateFee;
 	}
 
 	/** Returns whether the liability waiver has been accepted.
 	 * @return
 	 */
-	public byte getLiabilityWaiver() {
+	public boolean getLiabilityWaiver() {
 		return this.liabilityWaiver;
 	}
 
 	/** Sets whether the liability waiver has been accepted.
 	 * @param liabilityWaiver
 	 */
-	public void setLiabilityWaiver(byte liabilityWaiver) {
+	public void setLiabilityWaiver(boolean liabilityWaiver) {
 		this.liabilityWaiver = liabilityWaiver;
 	}
 
 	/** Returns the fee associated with whether the player lives outside the county.
 	 * @return
 	 */
-	public BigDecimal getOutOfCountyFee() {
+	public double getOutOfCountyFee() {
 		return this.outOfCountyFee;
 	}
 
 	/** Sets the fee associated with whether the player lives outside the county.
 	 * @param outOfCountyFee
 	 */
-	public void setOutOfCountyFee(BigDecimal outOfCountyFee) {
+	public void setOutOfCountyFee(double outOfCountyFee) {
 		this.outOfCountyFee = outOfCountyFee;
 	}
 
@@ -574,14 +589,14 @@ public class Player_Registration{
 	/** Returns whether the photo waiver has been accepted.
 	 * @return
 	 */
-	public byte getPhotoWaiver() {
+	public boolean getPhotoWaiver() {
 		return this.photoWaiver;
 	}
 
 	/** Sets whether the photo waiver has been accepted
 	 * @param photoWaiver
 	 */
-	public void setPhotoWaiver(byte photoWaiver) {
+	public void setPhotoWaiver(boolean photoWaiver) {
 		this.photoWaiver = photoWaiver;
 	}
 
@@ -589,14 +604,14 @@ public class Player_Registration{
 	 * Returns whether the player has pitching experience
 	 * @return
 	 */
-	public byte getPitchingExperience() {
+	public boolean getPitchingExperience() {
 		return this.pitchingExperience;
 	}
 
 	/** Sets whether the player has pitching experience.
 	 * @param pitchingExperience
 	 */
-	public void setPitchingExperience(byte pitchingExperience) {
+	public void setPitchingExperience(boolean pitchingExperience) {
 		this.pitchingExperience = pitchingExperience;
 	}
 
@@ -617,43 +632,43 @@ public class Player_Registration{
 	/** Returns the refund amount.
 	 * @return
 	 */
-	public BigDecimal getRefundAmount() {
+	public double getRefundAmount() {
 		return this.refundAmount;
 	}
 
 	/** Sets the refund amount.
 	 * @param refundAmount
 	 */
-	public void setRefundAmount(BigDecimal refundAmount) {
+	public void setRefundAmount(double refundAmount) {
 		this.refundAmount = refundAmount;
 	}
 
 	/** Returns whether the player has accepted the refund policy.
 	 * @return
 	 */
-	public byte getRefundPolicy() {
+	public boolean getRefundPolicy() {
 		return this.refundPolicy;
 	}
 
 	/** Sets whether the player has accepted the refund policy.
 	 * @param refundPolicy
 	 */
-	public void setRefundPolicy(byte refundPolicy) {
+	public void setRefundPolicy(boolean refundPolicy) {
 		this.refundPolicy = refundPolicy;
 	}
 
 	/** Returns the number of seasons a player has participated in.
 	 * @return
 	 */
-	public BigDecimal getSeasonsPlayed() {
-		return this.seasonsPlayeed;
+	public int getSeasonsPlayed() {
+		return this.seasonsPlayed;
 	}
 
 	/** Sets the number of seasons a players has participated in.
-	 * @param seasonsPlayeed
+	 * @param seasonsPlayed
 	 */
-	public void setSeasonsPlayeed(BigDecimal seasonsPlayeed) {
-		this.seasonsPlayeed = seasonsPlayeed;
+	public void setSeasonsPlayed(int seasonsPlayed) {
+		this.seasonsPlayed = seasonsPlayed;
 	}
 
 	/** Returns the secondary position a player prefers.
@@ -687,28 +702,28 @@ public class Player_Registration{
 	/** Returns the total fees associated with the player registration.
 	 * @return
 	 */
-	public BigDecimal getTotalFees() {
+	public double getTotalFees() {
 		return this.totalFees;
 	}
 
 	/** Sets the total fees associated with the player registration.
 	 * @param totalFees
 	 */
-	public void setTotalFees(BigDecimal totalFees) {
+	public void setTotalFees(double totalFees) {
 		this.totalFees = totalFees;
 	}
 
 	/** Returns the camp and uniform fees.
 	 * @return
 	 */
-	public BigDecimal getUniformCampFee() {
+	public double getUniformCampFee() {
 		return this.uniformCampFee;
 	}
 
 	/** Sets the fees associated with camp or uniforms.
 	 * @param uniformCampFee
 	 */
-	public void setUniformCampFee(BigDecimal uniformCampFee) {
+	public void setUniformCampFee(double uniformCampFee) {
 		this.uniformCampFee = uniformCampFee;
 	}
 
