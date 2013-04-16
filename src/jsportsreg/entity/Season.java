@@ -10,6 +10,9 @@ package jsportsreg.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -18,7 +21,7 @@ import java.util.List;
  */
 
 public class Season{
-	
+
 	/** Primary key for the Season table in the database, season identifier.
 	 * 
 	 */
@@ -33,7 +36,7 @@ public class Season{
 	 * 
 	 */
 	private String seasonName;
-	
+
 	/** The date the season starts.
 	 * 
 	 */
@@ -48,8 +51,18 @@ public class Season{
 	 * 
 	 */
 	public Season() {
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy"); 
+		this.seasonID = -1;
+		try{
+			this.seasonStartDate = df.parse("1-1-1900");
+			this.seasonEndDate = df.parse("1-1-1900");
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		this.seasonName = "";
+		this.divisions = new ArrayList<Division>();
 	}
-	
+
 	/** Constructor that creates a fully populated Season object.
 	 * @param seasonID
 	 * @param seasonEndDate
