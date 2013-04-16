@@ -114,7 +114,7 @@ public class Player_RegistrationTest {
 		instance0.setOutOfCountyFee(20.00);
 		instance0.setPantSize("Youth Large");
 		Person person1 = new Person();
-		instance0.setPerson(person0);
+		instance0.setPerson(person1);
 		instance0.setPhotoWaiver(true);
 		instance0.setPitchingExperience(true);
 		instance0.setPrimaryPosition("P");
@@ -145,7 +145,7 @@ public class Player_RegistrationTest {
 		assertEquals("Player_Registration Test 3: liabilityWaiver", true, instance0.getLiabilityWaiver() );
 		assertEquals("Player_Registration Test 3: outOfCountyFee", 20.00, instance0.getOutOfCountyFee(), 0.001 );
 		assertEquals("Player_Registration Test 3: pantSize", "Youth Large", instance0.getPantSize() );
-		assertEquals("Player_Registration Test 3: person", person0, instance0.getPerson() );
+		assertEquals("Player_Registration Test 3: person", person1, instance0.getPerson() );
 		assertEquals("Player_Registration Test 3: photoWaiver", true, instance0.getPhotoWaiver() );
 		assertEquals("Player_Registration Test 3: pitchingExperience", true, instance0.getPitchingExperience() );
 		assertEquals("Player_Registration Test 3: primaryPosition", "P", instance0.getPrimaryPosition() );
