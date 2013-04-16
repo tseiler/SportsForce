@@ -1,8 +1,8 @@
 /**
- * Travis D. Seiler
+ * Travis D. Seiler and Ryan M. Kinsley
  * MIST 7570, Spring 2013
  * Dr. Dan Everett
- * @author tseiler
+ * @author tseiler and rkinsley
  *
  */
 
@@ -23,12 +23,12 @@ public class Division{
 	 * 
 	 */
 	private int divisionID;
-	
+
 	/** The description for the Division object.
 	 * 
 	 */
 	private String divisionDescription;
-	
+
 	/** The name of the division.
 	 * 
 	 */
@@ -53,6 +53,13 @@ public class Division{
 	 * 
 	 */
 	public Division() {
+		this.divisionID= -1;
+		this.divisionDescription= "";
+		this.divisionName= "";
+		this.season= new Season();
+		this.sport= new Sport();
+		this.playerRegistrations = new ArrayList<Player_Registration>;
+		
 	}
 
 	/** Constructor to create a fully populated Division object.
