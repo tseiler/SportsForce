@@ -8,6 +8,7 @@
 
 package jsportsreg.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,6 +44,10 @@ public class Sport{
 	 * 
 	 */
 	public Sport() {
+		this.sportID = -1;
+		this.sportName = "";
+		this.sportDescription = "";
+		this.divisions = new ArrayList<Division>();
 	}
 
 	/** Constructor to create a fully populated sport object.
