@@ -8,6 +8,7 @@
 
 package jsportsreg.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,7 +59,7 @@ public class Division{
 		this.divisionName= "";
 		this.season= new Season();
 		this.sport= new Sport();
-		this.playerRegistrations = new ArrayList<Player_Registration>;
+		this.playerRegistrations = new ArrayList<Player_Registration>();
 		
 	}
 
