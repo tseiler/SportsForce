@@ -2,7 +2,7 @@
  * Registration controller that sends requests to JSP pages or back to index.jsp
  * @author khsu - Katie
  */
-package controller;
+package jsportsreg.controller;
 
 import jsportsreg.entity.*;
 
