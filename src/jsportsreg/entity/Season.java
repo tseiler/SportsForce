@@ -22,6 +22,52 @@ import java.text.SimpleDateFormat;
 
 public class Season{
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((seasonEndDate == null) ? 0 : seasonEndDate.hashCode());
+		result = prime * result
+				+ ((seasonName == null) ? 0 : seasonName.hashCode());
+		result = prime * result
+				+ ((seasonStartDate == null) ? 0 : seasonStartDate.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Season))
+			return false;
+		Season other = (Season) obj;
+		if (seasonEndDate == null) {
+			if (other.seasonEndDate != null)
+				return false;
+		} else if (!seasonEndDate.equals(other.seasonEndDate))
+			return false;
+		if (seasonName == null) {
+			if (other.seasonName != null)
+				return false;
+		} else if (!seasonName.equals(other.seasonName))
+			return false;
+		if (seasonStartDate == null) {
+			if (other.seasonStartDate != null)
+				return false;
+		} else if (!seasonStartDate.equals(other.seasonStartDate))
+			return false;
+		return true;
+	}
+
 	/** Primary key for the Season table in the database, season identifier.
 	 * 
 	 */

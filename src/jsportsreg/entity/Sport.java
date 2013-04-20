@@ -20,6 +20,49 @@ import java.util.List;
 public class Sport{
 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((sportDescription == null) ? 0 : sportDescription.hashCode());
+		result = prime * result + sportID;
+		result = prime * result
+				+ ((sportName == null) ? 0 : sportName.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Sport))
+			return false;
+		Sport other = (Sport) obj;
+		if (sportDescription == null) {
+			if (other.sportDescription != null)
+				return false;
+		} else if (!sportDescription.equals(other.sportDescription))
+			return false;
+		if (sportID != other.sportID)
+			return false;
+		if (sportName == null) {
+			if (other.sportName != null)
+				return false;
+		} else if (!sportName.equals(other.sportName))
+			return false;
+		return true;
+	}
+
 	/** The primary key associated with the Sport.
 	 * 
 	 */

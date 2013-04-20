@@ -54,6 +54,9 @@ public class SportTest {
 		assertEquals("Sport Test 5:  Sport Description", "Soccer", instance0.getSportDescription() );
 		assertEquals("Sport Test 5:  Divisions", 1, instance0.getDivisions().size() );
 		
+		Sport instance2 = new Sport( 1111111, "Mixed Martial Arts", "MMA", dList );
+		
+		assertEquals("Sport Test 6:  Sport Equals", true, instance1.equals(instance2) );
 	}
 
 }

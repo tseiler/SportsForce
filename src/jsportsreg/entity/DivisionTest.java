@@ -48,8 +48,14 @@ public class DivisionTest {
 		assertEquals("Division Test 1: Division Description","T-Ball: 5 & 6 yoa",instance1.getDivisionDescription());
 		assertEquals("Division Test 1: Division Name","5 & 6 years old",instance1.getDivisionName());
 		
+		Season season1 = new Season();
+		Sport sport1 = new Sport();
 		
 		
+		Division instance2 = new Division(3, "T-Ball: 5 & 6 yoa","5 & 6 years old", season1, sport1, 
+				pList);
+		
+		assertEquals("Division Test 2: Division Equals", true, instance1.equals(instance2) );
 
 	}
 

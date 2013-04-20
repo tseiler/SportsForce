@@ -65,6 +65,13 @@ public class SeasonTest {
 		assertEquals("Season Test 3:  endDate", endDate2, instance0.getSeasonEndDate() );
 		assertEquals("Season Test 3:  Divisions", 2, instance0.getDivisions().size() );
 		
+		Date startDate3 = df.parse("1-1-2013");
+		Date endDate3 = df.parse("5-1-2013");
+		
+		Season instance2 = new Season( 2013, endDate3, "Spring 2013", startDate3, dList );
+		
+		assertEquals("Season Test 4:  Divisions", true, instance1.equals(instance2) );
+		
 	}
 
 }

@@ -20,6 +20,59 @@ import java.util.List;
 public class Division{
 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((divisionDescription == null) ? 0 : divisionDescription
+						.hashCode());
+		result = prime * result
+				+ ((divisionName == null) ? 0 : divisionName.hashCode());
+		result = prime * result + ((season == null) ? 0 : season.hashCode());
+		result = prime * result + ((sport == null) ? 0 : sport.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Division))
+			return false;
+		Division other = (Division) obj;
+		if (divisionDescription == null) {
+			if (other.divisionDescription != null)
+				return false;
+		} else if (!divisionDescription.equals(other.divisionDescription))
+			return false;
+		if (divisionName == null) {
+			if (other.divisionName != null)
+				return false;
+		} else if (!divisionName.equals(other.divisionName))
+			return false;
+		if (season == null) {
+			if (other.season != null)
+				return false;
+		} else if (!season.equals(other.season))
+			return false;
+		if (sport == null) {
+			if (other.sport != null)
+				return false;
+		} else if (!sport.equals(other.sport))
+			return false;
+		return true;
+	}
+
 	/** The primary key for the Division class.
 	 * 
 	 */

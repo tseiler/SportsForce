@@ -77,7 +77,7 @@ public class RegistrationDBHelper {
 					"sportID, seasonID FROM Divisions" );
 			this.getSportStatement = conn.prepareStatement( "SELECT sportID, sport_name, sport_description FROM Sports " +
 					"WHERE sportID = ? ");
-			this.getDivisionsStatement = conn.prepareStatement( "SELECT seasonID, seasonName, seasonStartDate, seasonEndDate " +
+			this.getSeasonStatement = conn.prepareStatement( "SELECT seasonID, seasonName, seasonStartDate, seasonEndDate " +
 					"FROM Season WHERE seasonID = ?" );
 			
 			}catch(Exception ex){
@@ -208,7 +208,7 @@ public class RegistrationDBHelper {
 			this.player_registration.setRegistrationID(this.registrationID);
 			
 		}catch(Exception ex){
-			
+			ex.printStackTrace();
 		}
 
 	
@@ -268,6 +268,7 @@ public class RegistrationDBHelper {
 				this.getSportStatement.execute();
 				
 				ResultSet rs1 = this.getSportStatement.getResultSet();
+				rs1.next();
 				
 				s0Temp.setSportName( rs1.getString(2) );
 				s0Temp.setSportDescription( rs1.getString(3) );
@@ -276,10 +277,11 @@ public class RegistrationDBHelper {
 				Season s1Temp = new Season();
 				
 				s1Temp.setSeasonID( rs0.getInt(5) );
-				 
-				this.getSportStatement.execute();
+				this.getSeasonStatement.setInt(1, s1Temp.getSeasonID() );
+				this.getSeasonStatement.execute();
 				
-				ResultSet rs2 = this.getSportStatement.getResultSet();
+				ResultSet rs2 = this.getSeasonStatement.getResultSet();
+				rs2.next();
 				
 				s1Temp.setSeasonName( rs2.getString(2) );
 				s1Temp.setSeasonStartDate( rs2.getDate(3) );
@@ -293,7 +295,7 @@ public class RegistrationDBHelper {
 			}
 			
 		}catch( Exception ex ){
-			
+			ex.printStackTrace();
 		}
 		
 		return divisions;
