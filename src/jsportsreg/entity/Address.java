@@ -182,7 +182,7 @@ public class Address{
 	/** Sets the county associated with the address.
 	 * @param adressCounty
 	 */
-	public void setAdressCounty(String adressCounty) {
+	public void setAddressCounty(String adressCounty) {
 		this.addressCounty = adressCounty;
 	}
 

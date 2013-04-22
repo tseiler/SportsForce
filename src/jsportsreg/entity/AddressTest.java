@@ -41,7 +41,7 @@ public class AddressTest {
 		instance0.setAddressCity("Madison");
 		instance0.setAddressState("WI");
 		instance0.setAddressPostalCode("53709");
-		instance0.setAdressCounty("Dane");
+		instance0.setAddressCounty("Dane");
 		
 		assertEquals("Basic Constructor Test 1: All blank initialized values - Street", "1829 Spaight Street", instance0.getAddressStreet() );
 		assertEquals("Basic Constructor Test 1: All blank initialized values - City", "Madison", instance0.getAddressCity() );

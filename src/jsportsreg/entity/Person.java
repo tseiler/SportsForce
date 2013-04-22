@@ -438,6 +438,14 @@ public class Person {
 	public void setEmergencyContacts(List<Person> emergencyContacts) {
 		this.emergencyContacts = emergencyContacts;
 	}
+	
+	/** Adds an Emergency Contact to the list.
+	 * @param person		A person to add to the Emergency Contacts list.
+	 */
+	public void addEmergencyContact(Person person){
+		this.emergencyContacts.add(person);
+	}
+	
 
 	/**
 	 * Returns a list Player_Registration objects associated with the Person.  These denote all Seasons and

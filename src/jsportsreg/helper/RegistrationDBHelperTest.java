@@ -63,4 +63,69 @@ public class RegistrationDBHelperTest {
 		}
 	}
 
+	@Test
+	public void testPlayer_Registration() throws Exception{
+		
+		RegistrationDBHelper instance0 = new RegistrationDBHelper();
+		
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+		
+		Player_Registration pr0 = new Player_Registration();
+		Date dateTest1 = df.parse("12-21-1975"); 
+		Person p0 = new Person();
+		
+		p0.setFirstName("Alexzander");
+		p0.setMiddleName("Edward");
+		p0.setLastName("Seiler");
+		p0.setSuffixName("");
+		p0.setNickName("Zander");
+		p0.setBirthDate(dateTest1);
+		p0.setGender("Male");
+		p0.setRole("Player");
+		p0.setWorkPhone("404-555-1234");
+		p0.setHomePhone("404-555-9876");
+		p0.setMobilePhone("404-555-4321");
+		
+		Address addr0 = new Address();
+		
+		addr0.setAddressStreet("1829 Spaight Street");
+		addr0.setAddressCity("Madison");
+		addr0.setAddressState("WI");
+		addr0.setAddressPostalCode("53709");
+		addr0.setAddressCounty("Dane");
+		
+		p0.addAddress(addr0);
+		
+		Date dateTest2 = df.parse("12-3-1957"); 
+		Person p1 = new Person();
+		
+		p1.setFirstName("Travis");
+		p1.setMiddleName("David");
+		p1.setLastName("Seiler");
+		p1.setSuffixName("");
+		p1.setNickName("");
+		p1.setBirthDate(dateTest2);
+		p1.setGender("Male");
+		p1.setRole("Player");
+		p1.setWorkPhone("404-555-9999");
+		p1.setHomePhone("404-555-8888");
+		p1.setMobilePhone("404-555-5555");
+		
+		p0.addEmergencyContact(p1);
+		
+		pr0.setPerson(p0);
+		
+		Date tDate1 = df.parse("6-1-2013");
+		Date tDate2 = df.parse("8-30-2013");
+			
+		Season seasonVerify1 = new Season(789670000, tDate2, "Summer 2013", tDate1, new ArrayList<Division>() );
+		Sport sportVerify1 = new Sport(123233000, "Baseball", "Baseball", new ArrayList<Division>() );
+		Division d0 = new Division(1, "Minor 9 & 10 year olds", "Minor 9 & 10 year olds", 
+				seasonVerify1, sportVerify1, new ArrayList<Player_Registration>() );
+		
+		pr0.setDivision(d0);
+		
+		instance0.setPlayer_Registration(pr0);
+		
+	}
 }
