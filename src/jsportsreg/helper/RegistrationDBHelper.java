@@ -64,8 +64,8 @@ public class RegistrationDBHelper {
 					"mist7570", "GoDAWGS2013");
 			System.out.println("Connected to sports_force database");
 			
-			this.authPlayerRegistrationStatement = conn.prepareStatement("SELECT registrationID FROM Player_Registration" +
-					"WHERE registrationID = ? AND pass_phrase = sha1(?)" );
+			this.authPlayerRegistrationStatement = conn.prepareStatement("SELECT registrationID FROM Player_Registration " +
+					"WHERE registrationID = ? AND pass_phrase = SHA1(?)" );
 			
 			this.addPlayerRegistrationStatement = conn.prepareStatement("INSERT INTO sports_force.Player_Registration" + 
 					"( divisionID, personID, additional_position, code_of_conduct, primary_position, secondary_position, balance," +
@@ -74,7 +74,7 @@ public class RegistrationDBHelper {
 					"liability_waiver, photo_waiver, refund_amount, refund_policy, seasons_played, total_fees, socks_size," +
 					"uniform_camp_fee, pass_phrase)" +
 					"VALUES" + 
-					"(  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sha1(?) )", 
+					"(  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SHA1(?) )", 
 					PreparedStatement.RETURN_GENERATED_KEYS );
 			
 			this.updatePlayerRegistrationStatement = conn.prepareStatement("UPDATE sports_force.Player_Registration " + 
@@ -83,11 +83,11 @@ public class RegistrationDBHelper {
 					"catching_gear = ?, by_laws_agreement = ?, donation = ?, fundraising_fee = ?, late_fee = ?, " +
 					"out_of_county_fee = ?, discount = ?, hat_size = ?, jersey_1 = ?, jersey_2 = ?, jersey_size = ?, " +
 					"pant_size = ?, liability_waiver = ?, photo_waiver = ?, refund_amount = ?, refund_policy = ?, " +
-					"seasons_played = ?, total_fees = ?, socks_size = ?, uniform_camp_fee = ?, pass_phrase = sha1(?) " +
+					"seasons_played = ?, total_fees = ?, socks_size = ?, uniform_camp_fee = ?, pass_phrase = SHA1(?) " +
 					"WHERE registrationID = ?");
 			
 			this.delPlayerRegistrationStatement = conn.prepareStatement("DELETE FROM Player_Registration " + 
-					"WHERE registrationID = ? AND pass_phrase = sha1(?)");
+					"WHERE registrationID = ? AND pass_phrase = SHA1(?)");
 			
 			this.getPlayerRegistrationStatement = conn.prepareStatement("SELECT  " + 
 					"divisionID, personID, additional_position, code_of_conduct, primary_position, " +
@@ -95,8 +95,8 @@ public class RegistrationDBHelper {
 					"catching_gear, by_laws_agreement, donation, fundraising_fee, late_fee, " +
 					"out_of_county_fee, discount, hat_size, jersey_1, jersey_2, jersey_size, " +
 					"pant_size, liability_waiver, photo_waiver, refund_amount, refund_policy, " +
-					"seasons_played, total_fees, socks_size, uniform_camp_fee FROM Player_Registration" +
-					"WHERE registrationID = ? AND pass_phrase = sha1(?)");
+					"seasons_played, total_fees, socks_size, uniform_camp_fee FROM Player_Registration " +
+					"WHERE registrationID = ? AND pass_phrase = SHA1(?)");
 			
 			this.addPersonStatement = conn.prepareStatement("INSERT INTO People " +
 					"( first_name, middle_name, last_name, email_address, home_phone, birth_date, " + 
@@ -124,7 +124,7 @@ public class RegistrationDBHelper {
 			this.delEmergency_ContactStatement = conn.prepareStatement("DELETE FROM Emergency_Contacts " +
 					"WHERE personID = ?" );
 			
-			this.getEmergencyContactsStatement = conn.prepareStatement("SELECT contact ID FROM Emergency_Contacts " +
+			this.getEmergencyContactsStatement = conn.prepareStatement("SELECT contactID FROM Emergency_Contacts " +
 					"WHERE personID = ?");
 			
 			this.addPersonAddressStatement = conn.prepareStatement("INSERT INTO Addresses " +
@@ -152,7 +152,10 @@ public class RegistrationDBHelper {
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
+		
+		this.player_registration = new Player_Registration();
 
+		
 		
 	}
 	
@@ -230,6 +233,7 @@ public class RegistrationDBHelper {
 			ResultSet rs = this.getPersonStatement.getResultSet();
 			if( rs.next() ){
 				
+				person.setPersonID(personID);
 				person.setFirstName(rs.getString(1));
 				person.setMiddleName(rs.getString(2));
 				person.setLastName(rs.getString(3));
@@ -391,6 +395,34 @@ public class RegistrationDBHelper {
 	
 	private void updatePlayer_Registration(){
 		try{
+			
+			/* Update the person associated with the player registration
+			 * 
+			 */
+			this.updatePerson( this.player_registration.getPerson() );
+			
+			/*
+			 * Create records for all of the people that are emergency contacts.  Extracting the 
+			 * newly generated key after each key.
+			 */
+			
+			for( Person p0 : this.player_registration.getPerson().getEmergencyContacts() ){
+				this.delPersonStatement.setInt(1, p0.getPersonID() );
+				this.delPersonStatement.executeUpdate();
+				this.addPerson(p0);
+			}
+			
+			/*
+			 * Create all of the emergency contact references for each person.
+			 */
+			this.updateEmergencyContacts( this.player_registration.getPerson().getEmergencyContacts() );
+			
+			/*
+			 * Create all of the addresses that are related to the player.
+			 */
+			this.updateAddresses( this.player_registration.getPerson().getAddresses() );
+			
+			
 			this.updatePlayerRegistrationStatement.setInt( 1, this.player_registration.getDivision().getDivisionID() );
 			this.updatePlayerRegistrationStatement.setInt( 2, this.player_registration.getPerson().getPersonID() );
 			this.updatePlayerRegistrationStatement.setString(3, this.player_registration.getAdditionalPosition() );
@@ -423,32 +455,6 @@ public class RegistrationDBHelper {
 			this.updatePlayerRegistrationStatement.setInt(30, this.registrationID );
 			this.updatePlayerRegistrationStatement.setString(31, this.passPhrase );
 			
-			/* Update the person associated with the player registration
-			 * 
-			 */
-			this.updatePerson( this.player_registration.getPerson() );
-			
-			/*
-			 * Create records for all of the people that are emergency contacts.  Extracting the 
-			 * newly generated key after each key.
-			 */
-			
-			for( Person p0 : this.player_registration.getPerson().getEmergencyContacts() ){
-				this.delPersonStatement.setInt(1, p0.getPersonID() );
-				this.delPersonStatement.executeUpdate();
-				this.addPerson(p0);
-			}
-			
-			/*
-			 * Create all of the emergency contact references for each person.
-			 */
-			this.updateEmergencyContacts( this.player_registration.getPerson().getEmergencyContacts() );
-			
-			/*
-			 * Create all of the addresses that are related to the player.
-			 */
-			this.updateAddresses( this.player_registration.getPerson().getAddresses() );
-			
 			this.updatePlayerRegistrationStatement.executeUpdate();
 			
 		}catch( Exception ex ){
@@ -464,6 +470,32 @@ public class RegistrationDBHelper {
 	private void addPlayer_Registration(){
 		
 		try{
+			
+		
+			/*
+			 * Create person record for the specific player.
+			 */
+			this.addPerson( player_registration.getPerson() );
+			
+			/*
+			 * TODO:  Create records for all of the people that are emergency contacts.  Extracting the 
+			 * newly generated key after each key.
+			 */
+			
+			for( Person p0 : this.player_registration.getPerson().getEmergencyContacts() ){
+				this.addPerson(p0);
+			}
+			
+			/*
+			 * TODO:  Create all of the emergency contact references for each person.
+			 */
+			this.updateEmergencyContacts( this.player_registration.getPerson().getEmergencyContacts() );
+			
+			/*
+			 * TODO:  Create all of the addresses that are related to the player.
+			 */
+			this.updateAddresses( this.player_registration.getPerson().getAddresses() );
+			
 			this.addPlayerRegistrationStatement.setInt( 1, this.player_registration.getDivision().getDivisionID() );
 			this.addPlayerRegistrationStatement.setInt( 2, this.player_registration.getPerson().getPersonID() );
 			this.addPlayerRegistrationStatement.setString(3, this.player_registration.getAdditionalPosition() );
@@ -495,30 +527,6 @@ public class RegistrationDBHelper {
 			this.addPlayerRegistrationStatement.setString(29, this.player_registration.getSocksSize() );
 			this.addPlayerRegistrationStatement.setDouble(30, this.player_registration.getUniformCampFee() );
 			this.addPlayerRegistrationStatement.setString(31, this.passPhrase );
-		
-			/*
-			 * Create person record for the specific player.
-			 */
-			this.addPerson( player_registration.getPerson() );
-			
-			/*
-			 * TODO:  Create records for all of the people that are emergency contacts.  Extracting the 
-			 * newly generated key after each key.
-			 */
-			
-			for( Person p0 : this.player_registration.getPerson().getEmergencyContacts() ){
-				this.addPerson(p0);
-			}
-			
-			/*
-			 * TODO:  Create all of the emergency contact references for each person.
-			 */
-			this.updateEmergencyContacts( this.player_registration.getPerson().getEmergencyContacts() );
-			
-			/*
-			 * TODO:  Create all of the addresses that are related to the player.
-			 */
-			this.updateAddresses( this.player_registration.getPerson().getAddresses() );
 			
 			this.addPlayerRegistrationStatement.executeUpdate();
 			
@@ -598,11 +606,9 @@ public class RegistrationDBHelper {
 				this.registrationID = -1;
 			}
 			
+			this.player_registration.setRegistrationID(registrationID);
 			this.player_registration.setDivision(this.getDivision(rs.getInt(1)));
-			
-			
 			this.player_registration.setPerson(this.getPerson(rs.getInt(2)));
-			
 			this.player_registration.setAdditionalPosition(rs.getString(3));
 			this.player_registration.setCodeOfConduct(rs.getBoolean(4));
 			this.player_registration.setPrimaryPosition(rs.getString(5));
@@ -611,31 +617,30 @@ public class RegistrationDBHelper {
 			this.player_registration.setBaseFee(rs.getDouble(8));
 			this.player_registration.setPitchingExperience(rs.getBoolean(9));
 			this.player_registration.setCatchingExperience(rs.getBoolean(10));
-			this.player_registration.setByLawsAgreement(rs.getBoolean(11));
-			this.player_registration.setDonation(rs.getDouble(12));
-			this.player_registration.setFundraisingFee(rs.getDouble(13));
-			this.player_registration.setLateFee(rs.getDouble(14));
-			this.player_registration.setOutOfCountyFee(rs.getDouble(15));
-			this.player_registration.setDiscount(rs.getDouble(16));
-			this.player_registration.setHatSize(rs.getString(17));
-			this.player_registration.setJersey1(rs.getInt(18));
-			this.player_registration.setJersey2(rs.getInt(19));
-			this.player_registration.setJerseySize(rs.getString(20));
-			this.player_registration.setPantSize(rs.getString(21));
-			this.player_registration.setLiabilityWaiver(rs.getBoolean(22));
-			this.player_registration.setPhotoWaiver(rs.getBoolean(23));
-			this.player_registration.setRefundAmount(rs.getDouble(24));
-			this.player_registration.setRefundPolicy(rs.getBoolean(25));
-			this.player_registration.setSeasonsPlayed(rs.getInt(26));
-			this.player_registration.setTotalFees(rs.getDouble(27));
-			this.player_registration.setSocksSize(rs.getString(28));
-			this.player_registration.setUniformCampFee(rs.getDouble(29));
-			this.player_registration.setRegistrationID(rs.getInt(30));
+			this.player_registration.setCatchingGear(rs.getBoolean(11));
+			this.player_registration.setByLawsAgreement(rs.getBoolean(12));
+			this.player_registration.setDonation(rs.getDouble(13));
+			this.player_registration.setFundraisingFee(rs.getDouble(14));
+			this.player_registration.setLateFee(rs.getDouble(15));
+			this.player_registration.setOutOfCountyFee(rs.getDouble(16));
+			this.player_registration.setDiscount(rs.getDouble(17));
+			this.player_registration.setHatSize(rs.getString(18));
+			this.player_registration.setJersey1(rs.getInt(19));
+			this.player_registration.setJersey2(rs.getInt(20));
+			this.player_registration.setJerseySize(rs.getString(21));
+			this.player_registration.setPantSize(rs.getString(22));
+			this.player_registration.setLiabilityWaiver(rs.getBoolean(23));
+			this.player_registration.setPhotoWaiver(rs.getBoolean(24));
+			this.player_registration.setRefundAmount(rs.getDouble(25));
+			this.player_registration.setRefundPolicy(rs.getBoolean(26));
+			this.player_registration.setSeasonsPlayed(rs.getInt(27));
+			this.player_registration.setTotalFees(rs.getDouble(28));
+			this.player_registration.setSocksSize(rs.getString(29));
+			this.player_registration.setUniformCampFee(rs.getDouble(30));
 			
 		}catch( Exception ex ){
 			ex.printStackTrace();
 		}
-		
 		
 	}
 	
@@ -669,7 +674,7 @@ public class RegistrationDBHelper {
 			this.getDivisionStatement.setInt(1, divisionID);
 			this.getDivisionStatement.execute();
 			
-			ResultSet rs0 = this.getDivisionsStatement.getResultSet();
+			ResultSet rs0 = this.getDivisionStatement.getResultSet();
 			
 			if( rs0.next() ){
 				Division dTemp = new Division();
