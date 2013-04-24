@@ -5,10 +5,17 @@ import jsportsreg.entity.*;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import org.junit.Test;
+
+import com.sun.media.sound.EmergencySoundbank;
+
 import java.util.ArrayList;
 
 public class RegistrationDBHelperTest {
@@ -67,6 +74,126 @@ public class RegistrationDBHelperTest {
 	@Test
 	public void testPlayer_Registration() throws Exception{
 		
+		String JDBC_URL = "jdbc:mysql://xlf.cqqc3wlbhkub.us-east-1.rds.amazonaws.com/sports_force";
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(JDBC_URL,
+					"mist7570", "GoDAWGS2013");
+			System.out.println("Connected to sports_force database to delete JUnit Test Records");
+			
+			/*
+			 * Prepared Statements for specific JUnit cleanup.
+			 */
+			
+			PreparedStatement pKeyStmt = conn.prepareStatement("SELECT personID FROM People " + 
+					"WHERE first_name = ? AND middle_name = ? AND last_name = ? AND birth_date = ? AND gender = ? AND " +
+					"role = ? AND work_phone = ? AND home_phone = ? AND mobile_phone = ?");
+			
+			PreparedStatement cleanAddressesStmt = conn.prepareStatement("DELETE FROM Addresses " + 
+					"WHERE personID = ?");
+			
+			PreparedStatement countEmergencyContactStmt = conn.prepareStatement("SELECT COUNT(*) FROM Emergency_Contacts " +
+					"WHERE personID = ?");
+			
+			PreparedStatement listEmergencyContactsStmt = conn.prepareStatement("SELECT contactID FROM Emergency_Contacts " +
+					"WHERE personID = ?");
+			
+			PreparedStatement cleanEmergencyContactsStmt = conn.prepareStatement("DELETE FROM Emergency_Contacts " + 
+					"WHERE personID = ?");
+			
+			PreparedStatement cleanPersonStmt = conn.prepareStatement("DELETE FROM People " + 
+					"WHERE personID = ?");
+			
+			PreparedStatement cleanPlayerRegistrationStmt = conn.prepareStatement("DELETE FROM Player_Registration " + 
+					"WHERE personID = ?");
+			
+			/*
+			 * Get the primary key of the person associated with player registration.
+			 */
+			
+			pKeyStmt.setString(1, "Phillip");
+			pKeyStmt.setString(2, "Nande");
+			pKeyStmt.setString(3, "Sukoluski");
+			pKeyStmt.setString(4, "1975-12-21");
+			pKeyStmt.setString(5, "Male");
+			pKeyStmt.setString(6, "Player");
+			pKeyStmt.setString(7,"404-555-1234");
+			pKeyStmt.setString(8, "404-555-9876");
+			pKeyStmt.setString(9, "404-555-4321");
+			
+			pKeyStmt.execute();
+			
+			ResultSet rsCleanUp = pKeyStmt.getResultSet();
+			
+			int pKey;
+
+			rsCleanUp.next();
+			pKey = rsCleanUp.getInt(1);
+			
+			/*
+			 * Delete the associated addresses with this primary key.
+			 */
+			
+			cleanAddressesStmt.setInt(1, pKey);
+			cleanAddressesStmt.executeUpdate();
+			
+			/*
+			 * Delete the associated Emergency contacts and record the IDs of the people in a list.
+			 */
+			
+			listEmergencyContactsStmt.setInt(1, pKey);
+			countEmergencyContactStmt.setInt(1, pKey);
+			listEmergencyContactsStmt.execute();
+			countEmergencyContactStmt.execute();
+			
+			ResultSet rsEC = listEmergencyContactsStmt.getResultSet();
+			ResultSet rsECCount = countEmergencyContactStmt.getResultSet();
+			
+			rsECCount.next();
+			
+			int [] contacts = new int[rsECCount.getInt(1)];
+			
+			int i = 0;
+			while( rsEC.next() ){
+				contacts[i++] = rsEC.getInt(1);
+			}
+			
+			cleanEmergencyContactsStmt.setInt(1, pKey);
+			cleanEmergencyContactsStmt.executeUpdate();
+			
+			/*
+			 * Delete the people that were associated with the emergency contacts, driven from the 
+			 * list created in the previous step.
+			 */
+			
+			for( int key : contacts){
+				
+				cleanPersonStmt.setInt(1, key);
+				cleanPersonStmt.executeUpdate();
+			}
+			
+			/*
+			 * Delete the Player Registration records associated with the specific primary key.
+			 */
+			
+			cleanPlayerRegistrationStmt.setInt(1, pKey);
+			cleanPlayerRegistrationStmt.executeUpdate();
+			
+			/*
+			 * Delete the person associated with this primary key.
+			 */
+			
+			cleanPersonStmt.setInt(1, pKey);
+			cleanPersonStmt.executeUpdate();
+			
+			
+		}catch(Exception ex){
+			System.out.println("Unable to cleanup test data.  May not exist...");
+			ex.printStackTrace();
+		}
+		
+		
 		RegistrationDBHelper instance0 = new RegistrationDBHelper();
 		
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
@@ -75,11 +202,11 @@ public class RegistrationDBHelperTest {
 		Date dateTest1 = df.parse("12-21-1975"); 
 		Person p0 = new Person();
 		
-		p0.setFirstName("Alexzander");
-		p0.setMiddleName("Edward");
-		p0.setLastName("Seiler");
+		p0.setFirstName("Phillip");
+		p0.setMiddleName("Nande");
+		p0.setLastName("Sukoluski");
 		p0.setSuffixName("");
-		p0.setNickName("Zander");
+		p0.setNickName("Suki");
 		p0.setBirthDate(dateTest1);
 		p0.setGender("Male");
 		p0.setRole("Player");
@@ -100,14 +227,14 @@ public class RegistrationDBHelperTest {
 		Date dateTest2 = df.parse("12-3-1957"); 
 		Person p1 = new Person();
 		
-		p1.setFirstName("Travis");
-		p1.setMiddleName("David");
-		p1.setLastName("Seiler");
+		p1.setFirstName("Bob");
+		p1.setMiddleName("Bill");
+		p1.setLastName("Sukoluski");
 		p1.setSuffixName("");
 		p1.setNickName("");
 		p1.setBirthDate(dateTest2);
 		p1.setGender("Male");
-		p1.setRole("Player");
+		p1.setRole("Parent/Guardian");
 		p1.setWorkPhone("404-555-9999");
 		p1.setHomePhone("404-555-8888");
 		p1.setMobilePhone("404-555-5555");
@@ -158,18 +285,17 @@ public class RegistrationDBHelperTest {
 		instance0.setPassPhrase("test123456");
 		instance0.setPlayer_Registration(pr0);
 		
-		assertEquals("Registration Data Test 1: registrationID", true, (-1 != instance0.getRegistrationID()) );
+		assertEquals("Registration Data Test 1: registrationID", true, (0 < instance0.getRegistrationID()) );
 		assertEquals("Registration Data Test 2: authentication", true, instance0.authenticateRegistration() );
 		
 		RegistrationDBHelper instance1 = new RegistrationDBHelper();
 		
-		instance1.setRegistrationID(instance0.getRegistrationID());
 		instance1.setPassPhrase("Test123");
+		instance1.setRegistrationID(instance0.getRegistrationID());
 		
 		assertEquals("Registration Date Test 3: authentication", false, instance1.authenticateRegistration() );
 		instance1.setPassPhrase("test123456");
 		instance1.setRegistrationID(instance0.getRegistrationID());
-		
 		
 		assertEquals("Registration Data Test 4: additionalPosition", "CF", instance1.getPlayer_Registration().getAdditionalPosition() );
 		assertEquals("Registration Data Test 4: balance", 500.00, instance1.getPlayer_Registration().getBalance(), 2);
@@ -203,6 +329,72 @@ public class RegistrationDBHelperTest {
 		assertEquals("Registration Data Test 4: totalFees", 325.00, instance1.getPlayer_Registration().getTotalFees(), 0.001 );
 		assertEquals("Registration Data Test 4: uniformCampFee", 25.50, instance1.getPlayer_Registration().getUniformCampFee(), 0.001 );
 	
+		/*
+		 * Test Update Functionality
+		 */
+		
+		addr0.setAddressCity("Lodi");
+		addr0.setAddressCounty("Columbia");
+		
+		p1.setEmailAddress("test@test.com");
+		p1.setFirstName("Phyllis");
+		p1.setGender("Female");
+		p1.setMiddleName("Luanne");
+		p1.setMobilePhone("678-555-4444");
+		p1.setRole("Emergency Contact");
+		
+		p0.setNickName("Hero");
+		
+		pr0.setDonation(100);
+		pr0.setSecondaryPosition("3B");
+		pr0.setPrimaryPosition("P");
+		pr0.setAdditionalPosition("SS");
+		pr0.setPitchingExperience(true);
+		
+		instance0.setPlayer_Registration(pr0);
+		
+		/*
+		 * Create a new instance to pull data for final test.
+		 */
+		
+		RegistrationDBHelper instance2 = new RegistrationDBHelper();
+		
+		instance2.setPassPhrase("test123456");
+		instance2.setRegistrationID( instance1.getRegistrationID() );
+		
+		assertEquals("Registration Data Test 5: additionalPosition", "SS", instance2.getPlayer_Registration().getAdditionalPosition() );
+		assertEquals("Registration Data Test 5: balance", 500.00, instance2.getPlayer_Registration().getBalance(), 2);
+		assertEquals("Registration Data Test 5: baseFee", 200.00, instance2.getPlayer_Registration().getBaseFee(), 0.001 );
+		assertEquals("Registration Data Test 5: byLawsAgreement", false, instance2.getPlayer_Registration().getByLawsAgreement() );
+		assertEquals("Registration Data Test 5: catchingExperience", true, instance2.getPlayer_Registration().getCatchingExperience() );
+		assertEquals("Registration Data Test 5: catchingGear", true, instance2.getPlayer_Registration().getCatchingGear());
+		assertEquals("Registration Data Test 5: codeOfConduct", true, instance2.getPlayer_Registration().getCodeOfConduct() );
+		assertEquals("Registration Data Test 5: discount", 15.00, instance2.getPlayer_Registration().getDiscount(), 0.001 );
+		assertEquals("Registration Data Test 5: donation", 100.00, instance2.getPlayer_Registration().getDonation(), 0.001 );
+		assertEquals("Registration Data Test 5: division", d0, instance2.getPlayer_Registration().getDivision() );
+		assertEquals("Registration Data Test 5: fundraisingFee", 35.00, instance2.getPlayer_Registration().getFundraisingFee(), 0.001 );
+		assertEquals("Registration Data Test 5: hatSize", "Adult", instance2.getPlayer_Registration().getHatSize() );
+		assertEquals("Registration Data Test 5: jersey1", 15, instance2.getPlayer_Registration().getJersey1() );
+		assertEquals("Registration Data Test 5: jersey2", 12, instance2.getPlayer_Registration().getJersey2() );
+		assertEquals("Registration Data Test 5: jerseySize", "Youth Large", instance2.getPlayer_Registration().getJerseySize() );
+		assertEquals("Registration Data Test 5: lateFee", 2.00, instance2.getPlayer_Registration().getLateFee(), 0.001 );
+		assertEquals("Registration Data Test 5: liabilityWaiver", true, instance2.getPlayer_Registration().getLiabilityWaiver() );
+		assertEquals("Registration Data Test 5: outOfCountyFee", 20.00, instance2.getPlayer_Registration().getOutOfCountyFee(), 0.001 );
+		assertEquals("Registration Data Test 5: pantSize", "Youth Large", instance2.getPlayer_Registration().getPantSize() );
+		assertEquals("Registration Data Test 5: person", p0.getPersonID(), instance2.getPlayer_Registration().getPerson().getPersonID() );
+		assertEquals("Registration Data Test 5: photoWaiver", true, instance2.getPlayer_Registration().getPhotoWaiver() );
+		assertEquals("Registration Data Test 5: pitchingExperience", true, instance2.getPlayer_Registration().getPitchingExperience() );
+		assertEquals("Registration Data Test 5: primaryPosition", "P", instance2.getPlayer_Registration().getPrimaryPosition() );
+		assertEquals("Registration Data Test 5: refundAmount", 0.00, instance2.getPlayer_Registration().getRefundAmount(), 0.001 );
+		assertEquals("Registration Data Test 5: refundPolicy", true, instance2.getPlayer_Registration().getRefundPolicy() );
+		assertEquals("Registration Data Test 5: registrationID", instance0.getRegistrationID(), instance2.getPlayer_Registration().getRegistrationID() );
+		assertEquals("Registration Data Test 5: seasonsPlayed", 3, instance2.getPlayer_Registration().getSeasonsPlayed() );
+		assertEquals("Registration Data Test 5: secondaryPosition", "3B", instance2.getPlayer_Registration().getSecondaryPosition() );
+		assertEquals("Registration Data Test 5: socksSize", "Adult", instance2.getPlayer_Registration().getSocksSize() );
+		assertEquals("Registration Data Test 5: totalFees", 325.00, instance2.getPlayer_Registration().getTotalFees(), 0.001 );
+		assertEquals("Registration Data Test 5: uniformCampFee", 25.50, instance2.getPlayer_Registration().getUniformCampFee(), 0.001 );
+		
+		assertEquals("Registration Data Test 6: Person Nickname:", "Hero", instance2.getPlayer_Registration().getPerson().getNickName() );
 		
 	}
 }

@@ -149,6 +149,9 @@ public class RegistrationDBHelper {
 			this.getSeasonStatement = conn.prepareStatement( "SELECT seasonID, seasonName, seasonStartDate, seasonEndDate " +
 					"FROM Season WHERE seasonID = ?" );
 			
+			this.registrationID = -1;
+			this.passPhrase = "";
+			
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
@@ -385,6 +388,7 @@ public class RegistrationDBHelper {
 			this.addEmergency_ContactStatement.setInt( 1, this.player_registration.getPerson().getPersonID() );
 			
 			for( Person p0 : emergencyContacts ){
+				this.updatePerson(p0);
 				this.addEmergency_ContactStatement.setInt(2, p0.getPersonID() );
 				this.addEmergency_ContactStatement.executeUpdate();
 			}
@@ -401,16 +405,6 @@ public class RegistrationDBHelper {
 			 */
 			this.updatePerson( this.player_registration.getPerson() );
 			
-			/*
-			 * Create records for all of the people that are emergency contacts.  Extracting the 
-			 * newly generated key after each key.
-			 */
-			
-			for( Person p0 : this.player_registration.getPerson().getEmergencyContacts() ){
-				this.delPersonStatement.setInt(1, p0.getPersonID() );
-				this.delPersonStatement.executeUpdate();
-				this.addPerson(p0);
-			}
 			
 			/*
 			 * Create all of the emergency contact references for each person.
@@ -433,27 +427,29 @@ public class RegistrationDBHelper {
 			this.updatePlayerRegistrationStatement.setDouble(8, this.player_registration.getBaseFee() );
 			this.updatePlayerRegistrationStatement.setBoolean(9, this.player_registration.getPitchingExperience() );
 			this.updatePlayerRegistrationStatement.setBoolean(10, this.player_registration.getCatchingExperience() );
-			this.updatePlayerRegistrationStatement.setBoolean(11, this.player_registration.getByLawsAgreement() );
-			this.updatePlayerRegistrationStatement.setDouble(12, this.player_registration.getDonation() );
-			this.updatePlayerRegistrationStatement.setDouble(13, this.player_registration.getFundraisingFee() );
-			this.updatePlayerRegistrationStatement.setDouble(14, this.player_registration.getLateFee() );
-			this.updatePlayerRegistrationStatement.setDouble(15, this.player_registration.getOutOfCountyFee() );
-			this.updatePlayerRegistrationStatement.setDouble(16, this.player_registration.getDiscount() );
-			this.updatePlayerRegistrationStatement.setString(17, this.player_registration.getHatSize() );
-			this.updatePlayerRegistrationStatement.setInt(18, this.player_registration.getJersey1() );
-			this.updatePlayerRegistrationStatement.setInt(19, this.player_registration.getJersey2() );
-			this.updatePlayerRegistrationStatement.setString(20, this.player_registration.getJerseySize() );
-			this.updatePlayerRegistrationStatement.setString(21, this.player_registration.getPantSize() );
-			this.updatePlayerRegistrationStatement.setBoolean(22, this.player_registration.getLiabilityWaiver() );
-			this.updatePlayerRegistrationStatement.setBoolean(23, this.player_registration.getPhotoWaiver() );
-			this.updatePlayerRegistrationStatement.setDouble(24, this.player_registration.getRefundAmount() );
-			this.updatePlayerRegistrationStatement.setBoolean(25, this.player_registration.getRefundPolicy() );
-			this.updatePlayerRegistrationStatement.setInt(26, this.player_registration.getSeasonsPlayed() );
-			this.updatePlayerRegistrationStatement.setDouble(27, this.player_registration.getTotalFees() );
-			this.updatePlayerRegistrationStatement.setString(28, this.player_registration.getSocksSize() );
-			this.updatePlayerRegistrationStatement.setDouble(29, this.player_registration.getUniformCampFee() );
-			this.updatePlayerRegistrationStatement.setInt(30, this.registrationID );
+			this.updatePlayerRegistrationStatement.setBoolean(11, this.player_registration.getCatchingGear() );
+			this.updatePlayerRegistrationStatement.setBoolean(12, this.player_registration.getByLawsAgreement() );
+			this.updatePlayerRegistrationStatement.setDouble(13, this.player_registration.getDonation() );
+			this.updatePlayerRegistrationStatement.setDouble(14, this.player_registration.getFundraisingFee() );
+			this.updatePlayerRegistrationStatement.setDouble(15, this.player_registration.getLateFee() );
+			this.updatePlayerRegistrationStatement.setDouble(16, this.player_registration.getOutOfCountyFee() );
+			this.updatePlayerRegistrationStatement.setDouble(17, this.player_registration.getDiscount() );
+			this.updatePlayerRegistrationStatement.setString(18, this.player_registration.getHatSize() );
+			this.updatePlayerRegistrationStatement.setInt(19, this.player_registration.getJersey1() );
+			this.updatePlayerRegistrationStatement.setInt(20, this.player_registration.getJersey2() );
+			this.updatePlayerRegistrationStatement.setString(21, this.player_registration.getJerseySize() );
+			this.updatePlayerRegistrationStatement.setString(22, this.player_registration.getPantSize() );
+			this.updatePlayerRegistrationStatement.setBoolean(23, this.player_registration.getLiabilityWaiver() );
+			this.updatePlayerRegistrationStatement.setBoolean(24, this.player_registration.getPhotoWaiver() );
+			this.updatePlayerRegistrationStatement.setDouble(25, this.player_registration.getRefundAmount() );
+			this.updatePlayerRegistrationStatement.setBoolean(26, this.player_registration.getRefundPolicy() );
+			this.updatePlayerRegistrationStatement.setInt(27, this.player_registration.getSeasonsPlayed() );
+			this.updatePlayerRegistrationStatement.setDouble(28, this.player_registration.getTotalFees() );
+			this.updatePlayerRegistrationStatement.setString(29, this.player_registration.getSocksSize() );
+			this.updatePlayerRegistrationStatement.setDouble(30, this.player_registration.getUniformCampFee() );
 			this.updatePlayerRegistrationStatement.setString(31, this.passPhrase );
+			this.updatePlayerRegistrationStatement.setInt(32, this.registrationID );
+			
 			
 			this.updatePlayerRegistrationStatement.executeUpdate();
 			
@@ -604,40 +600,39 @@ public class RegistrationDBHelper {
 			ResultSet rs = this.getPlayerRegistrationStatement.getResultSet();
 			if( !rs.next() ){
 				this.registrationID = -1;
+			}else{
+				this.player_registration.setRegistrationID(registrationID);
+				this.player_registration.setDivision(this.getDivision(rs.getInt(1)));
+				this.player_registration.setPerson(this.getPerson(rs.getInt(2)));
+				this.player_registration.setAdditionalPosition(rs.getString(3));
+				this.player_registration.setCodeOfConduct(rs.getBoolean(4));
+				this.player_registration.setPrimaryPosition(rs.getString(5));
+				this.player_registration.setSecondaryPosition(rs.getString(6));
+				this.player_registration.setBalance(rs.getDouble(7));
+				this.player_registration.setBaseFee(rs.getDouble(8));
+				this.player_registration.setPitchingExperience(rs.getBoolean(9));
+				this.player_registration.setCatchingExperience(rs.getBoolean(10));
+				this.player_registration.setCatchingGear(rs.getBoolean(11));
+				this.player_registration.setByLawsAgreement(rs.getBoolean(12));
+				this.player_registration.setDonation(rs.getDouble(13));
+				this.player_registration.setFundraisingFee(rs.getDouble(14));
+				this.player_registration.setLateFee(rs.getDouble(15));
+				this.player_registration.setOutOfCountyFee(rs.getDouble(16));
+				this.player_registration.setDiscount(rs.getDouble(17));
+				this.player_registration.setHatSize(rs.getString(18));
+				this.player_registration.setJersey1(rs.getInt(19));
+				this.player_registration.setJersey2(rs.getInt(20));
+				this.player_registration.setJerseySize(rs.getString(21));
+				this.player_registration.setPantSize(rs.getString(22));
+				this.player_registration.setLiabilityWaiver(rs.getBoolean(23));
+				this.player_registration.setPhotoWaiver(rs.getBoolean(24));
+				this.player_registration.setRefundAmount(rs.getDouble(25));
+				this.player_registration.setRefundPolicy(rs.getBoolean(26));
+				this.player_registration.setSeasonsPlayed(rs.getInt(27));
+				this.player_registration.setTotalFees(rs.getDouble(28));
+				this.player_registration.setSocksSize(rs.getString(29));
+				this.player_registration.setUniformCampFee(rs.getDouble(30));
 			}
-			
-			this.player_registration.setRegistrationID(registrationID);
-			this.player_registration.setDivision(this.getDivision(rs.getInt(1)));
-			this.player_registration.setPerson(this.getPerson(rs.getInt(2)));
-			this.player_registration.setAdditionalPosition(rs.getString(3));
-			this.player_registration.setCodeOfConduct(rs.getBoolean(4));
-			this.player_registration.setPrimaryPosition(rs.getString(5));
-			this.player_registration.setSecondaryPosition(rs.getString(6));
-			this.player_registration.setBalance(rs.getDouble(7));
-			this.player_registration.setBaseFee(rs.getDouble(8));
-			this.player_registration.setPitchingExperience(rs.getBoolean(9));
-			this.player_registration.setCatchingExperience(rs.getBoolean(10));
-			this.player_registration.setCatchingGear(rs.getBoolean(11));
-			this.player_registration.setByLawsAgreement(rs.getBoolean(12));
-			this.player_registration.setDonation(rs.getDouble(13));
-			this.player_registration.setFundraisingFee(rs.getDouble(14));
-			this.player_registration.setLateFee(rs.getDouble(15));
-			this.player_registration.setOutOfCountyFee(rs.getDouble(16));
-			this.player_registration.setDiscount(rs.getDouble(17));
-			this.player_registration.setHatSize(rs.getString(18));
-			this.player_registration.setJersey1(rs.getInt(19));
-			this.player_registration.setJersey2(rs.getInt(20));
-			this.player_registration.setJerseySize(rs.getString(21));
-			this.player_registration.setPantSize(rs.getString(22));
-			this.player_registration.setLiabilityWaiver(rs.getBoolean(23));
-			this.player_registration.setPhotoWaiver(rs.getBoolean(24));
-			this.player_registration.setRefundAmount(rs.getDouble(25));
-			this.player_registration.setRefundPolicy(rs.getBoolean(26));
-			this.player_registration.setSeasonsPlayed(rs.getInt(27));
-			this.player_registration.setTotalFees(rs.getDouble(28));
-			this.player_registration.setSocksSize(rs.getString(29));
-			this.player_registration.setUniformCampFee(rs.getDouble(30));
-			
 		}catch( Exception ex ){
 			ex.printStackTrace();
 		}
