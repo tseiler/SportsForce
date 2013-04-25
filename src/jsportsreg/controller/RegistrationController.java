@@ -1,18 +1,15 @@
 /**
  * Registration controller that sends requests to JSP pages or back to index.jsp
  * @author khsu - Katie
- * @author Adrian
+ * @author Adrian Robinson
  */
 package jsportsreg.controller;
-
-import jsportsreg.entity.*;
-
-import java.io.IOException;
 
 import jsportsreg.entity.*;
 import jsportsreg.helper.RegistrationDBHelper;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 /**
  * Servlet implementation class RegistrationController
  */
@@ -51,19 +49,20 @@ public class RegistrationController extends HttpServlet {
 		ServletContext ctx = this.getServletContext();
     		    
 		// Get the parameters from request
+		/*
 		String ### = request.getParameter("###");
     		    
 		String %%% = request.getParameter("###");
 		if (%%% != null && (%%% = %%%.trim()).length() != 0) {
     		    	
 		}
-    		    
+    		*/    
 		// Create RegistrationDBHelper object to interact with database
 		RegistrationDBHelper rDBHelper = new RegistrationDBHelper();
 		// Create Player_Registration object to store registration info
 		Player_Registration pr = new Player_Registration();
 		// Add player registration info to database
-		rDBHelper.addPlayer_Registration(pr);
+		//rDBHelper.addPlayer_Registration(pr);
     		    
     		    
     }
@@ -72,6 +71,8 @@ public class RegistrationController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		/*
 		 *  Person form data for player, guardian1, and guardian2 objects
 		 *  @author Adrian Robinson
@@ -104,7 +105,19 @@ public class RegistrationController extends HttpServlet {
 		List<Address> addresses = null; 
 		List<Person> emergencyContacts = null;
 		List<Player_Registration> playerRegistrations = null;
-
+		
+		/*
+		 * Address form data
+		 * @author Adrian Robinson
+		 */
+		
+		String addressStreet = request.getParameter("street");
+		String addressCity = request.getParameter("city");
+		String addressState = request.getParameter("state");
+		String addressPostalCode = request.getParameter("zipCode");
+		String addressCounty = request.getParameter("county");
+		
+		
 		/*
 		 *  Player_Registration form data
 		 *  @author Adrian Robinson
@@ -118,7 +131,7 @@ public class RegistrationController extends HttpServlet {
 		boolean catchingGear = Boolean.parseBoolean(request.getParameter("catcherGear"));
 		boolean codeOfConduct = Boolean.parseBoolean(request.getParameter("codeConduct"));
 		double discount = 0.00;
-		double donation = Double.parseDouble(request.getParameter("donation"));
+		double donation = 0.00;
 		double fundraisingFee = 0.00;
 		String hatSize = request.getParameter("hatSize");
 		int jersey1 = Integer.parseInt(request.getParameter("jersey1"));
@@ -135,10 +148,20 @@ public class RegistrationController extends HttpServlet {
 		boolean refundPolicy = Boolean.parseBoolean(request.getParameter("refundPolicy"));
 		int seasonsPlayed = Integer.parseInt(request.getParameter("seasons"));
 		String secondaryPosition = request.getParameter("secPos");
-		String socksSize = request.getParameter("sockSize");
+		String socksSize = request.getParameter("socksSize");
 		double totalFees = 185.00;
 		double uniformCampFee = 0.00;
+		
+		// Used to display donation values in dollar currency
+		DecimalFormat d = new DecimalFormat("'$'0.00");
+		
+		// Hand Other donation values
+		if (request.getParameter("donation").matches("other"))
+			donation = Double.parseDouble(request.getParameter("dother"));
+		else
+			donation = Double.parseDouble(request.getParameter("donation"));
 
+		
 		// TODO set correct division based on birthDate
 		Division division = new Division();
 
@@ -159,7 +182,7 @@ public class RegistrationController extends HttpServlet {
 		 *  Create a player Person object
 		 *  @author Adrian Robinson
 		 */
-		Person player =new Person(personID, birthDate, pemailAddress,
+		Person player = new Person(personID, birthDate, pemailAddress,
 				pfirstName, gender, phomePhone, plastName,
 				middleName, "", nickName,
 				"", suffixName, "", addresses, emergencyContacts,
@@ -170,6 +193,14 @@ public class RegistrationController extends HttpServlet {
 		 *  @author Adrian Robinson
 		 */
 		Person personreg = player;
+		
+		/*
+		 * Address object to be used with @param player Person object
+		 * @author Adrian Robinson
+		 */
+		
+		Address playerAddress = new Address(0, addressStreet, addressCity, addressState, 
+				addressPostalCode, addressCounty, player);
 
 		/*
 		 *  Create a guardian 1 Person object
@@ -216,11 +247,46 @@ public class RegistrationController extends HttpServlet {
 		request.setAttribute("pfirstName", pfirstName);
 		request.setAttribute("middleName", middleName);
 		request.setAttribute("plastName", plastName);
-		request.setAttribute("pitcherExp", pitchingExperience);
-		request.setAttribute("catcherExp", catchingExperience);
+		request.setAttribute("suffix", suffixName);
+		request.setAttribute("nickName", nickName);
+		request.setAttribute("gender", gender);
+		request.setAttribute("birth", birth);
+		request.setAttribute("phomePhone", phomePhone);
+		request.setAttribute("street", addressStreet);
+		request.setAttribute("city", addressCity);
+		request.setAttribute("state", addressState);
+		request.setAttribute("county", addressCounty);
+		request.setAttribute("zipCode", addressPostalCode);
+		
+		request.setAttribute("seasons", seasonsPlayed);
 		request.setAttribute("priPos", primaryPosition);
 		request.setAttribute("secPos", secondaryPosition);
-		request.setAttribute("seasons", seasonsPlayed);
+		request.setAttribute("addPos", additionalPosition);
+		request.setAttribute("pitcherExp", pitchingExperience);
+		request.setAttribute("catcherExp", catchingExperience);
+		request.setAttribute("catcherGear", catchingGear);
+		request.setAttribute("jerseySize", jerseySize);
+		request.setAttribute("pantSize", pantSize);
+		request.setAttribute("socksSize", socksSize);
+		request.setAttribute("hatSize", hatSize);
+		request.setAttribute("jersey1", jersey1);
+		request.setAttribute("jersey2", jersey2);
+		
+		request.setAttribute("g1firstName", g1firstName);
+		request.setAttribute("g1lastName", g1lastName);
+		request.setAttribute("g1homePhone", g1homePhone);
+		request.setAttribute("g1workPhone", g1workPhone);
+		request.setAttribute("g1mobilePhone", g1mobilePhone);
+		request.setAttribute("g1emailAddress", g1emailAddress);
+		request.setAttribute("g1role", g1role);
+		request.setAttribute("g2firstName", g2firstName);
+		request.setAttribute("g2lastName", g2lastName);
+		request.setAttribute("g2homePhone", g2homePhone);
+		request.setAttribute("g2workPhone", g2workPhone);
+		request.setAttribute("g2mobilePhone", g2mobilePhone);
+		request.setAttribute("g2emailAddress", g2emailAddress);
+		request.setAttribute("g2role", g2role);
+		request.setAttribute("donation", d.format(donation));
 
 
 		dispatcher.forward(request,response);
@@ -269,6 +335,9 @@ public class RegistrationController extends HttpServlet {
 		System.out.println(guardian2.getHomePhone());
 		System.out.println(guardian2.getWorkPhone());
 		System.out.println(guardian2.getRole());
-		
+
+
+
 	}
+	
 }
