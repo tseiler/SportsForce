@@ -153,7 +153,7 @@ FONT {
 <OPTION VALUE="2010">2010
 </SELECT></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Home Phone: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=parea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("parea");>-<INPUT TYPE=TEXT NAME=pphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("pphone1");>-<INPUT TYPE=TEXT NAME=pphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("pphone2");></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Street Address: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME="address" SIZE=30 MAXLENGTH=30 VALUE=""></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Street Address: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME="street" SIZE=30 MAXLENGTH=30 VALUE=""></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>City: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=city SIZE=30 MAXLENGTH=30 VALUE=""></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>County: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=county>
 <OPTION VALUE=CHOOSE>-CHOOSE-
@@ -262,8 +262,9 @@ FONT {
 <TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>First Name:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1firstName SIZE=30 VALUE=""></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Last Name: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1lastName SIZE=30 VALUE=""></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Home Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1area SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1area");>-<INPUT TYPE=TEXT NAME=g1phone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1phone1");>-<INPUT TYPE=TEXT NAME=g1phone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g1phone2");></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Work Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1warea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1warea");>-<INPUT TYPE=TEXT NAME=g1wphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1wphone1");>-<INPUT TYPE=TEXT NAME=g1wphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g1wphone2");> &nbsp; <B>ext.</B> <INPUT TYPE=TEXT NAME=g1wext SIZE=5 MAXLENGTH=5 VALUE=""></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Work Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1warea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1warea");>-<INPUT TYPE=TEXT NAME=g1wphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1wphone1");>-<INPUT TYPE=TEXT NAME=g1wphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g1wphone2");> &nbsp; </TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Cell Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1marea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1marea");>-<INPUT TYPE=TEXT NAME=g1mphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1mphone1");>-<INPUT TYPE=TEXT NAME=g1mphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g1mphone2");></TD></TR>
+<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1emailAddress SIZE=30 VALUE=""></TD></TR>
 <!--
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=OPTP SIZE=30 VALUE=""></TD></TR>
 //-->
@@ -279,8 +280,9 @@ FONT {
 <TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><B>First Name:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2firstName SIZE=30 VALUE=""></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Last Name: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2lastName SIZE=30 VALUE=""></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Home Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2area SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2area");>-<INPUT TYPE=TEXT NAME=g2phone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2phone1");>-<INPUT TYPE=TEXT NAME=g2phone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g2phone2");></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Work Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2warea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2warea");>-<INPUT TYPE=TEXT NAME=g2wphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2wphone1");>-<INPUT TYPE=TEXT NAME=g2wphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g2wphone2");> &nbsp; <B>ext.</B> <INPUT TYPE=TEXT NAME=g2wext SIZE=5 MAXLENGTH=5 VALUE=""></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Work Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2warea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2warea");>-<INPUT TYPE=TEXT NAME=g2wphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2wphone1");>-<INPUT TYPE=TEXT NAME=g2wphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g2wphone2");> &nbsp; </TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Cell Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2marea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2marea");>-<INPUT TYPE=TEXT NAME=g2mphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2mphone1");>-<INPUT TYPE=TEXT NAME=g2mphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g2mphone2");></TD></TR>
+<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2emailAddress SIZE=30 VALUE=""></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Relationship:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=g2role>
 <OPTION VALUE="CHOOSE">CHOOSE
 <OPTION VALUE="Mother">Mother
@@ -291,44 +293,7 @@ FONT {
 <P>
 <HR>
 <P>
-<FONT SIZE=5 COLOR=0000CC><B>III. EMERGENCY INFORMATION:</B></FONT>
-<P>
-<TABLE WIDTH=600>
-<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Emergency Contact:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=ECONTACT SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Phone Number:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=EAREA SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("EAREA");>-<INPUT TYPE=TEXT NAME=EPHONE1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("EPHONE1");>-<INPUT TYPE=TEXT NAME=EPHONE2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("EPHONE2");></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>List any Medical Problems:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=PROBLEMS SIZE=30 VALUE="N/A"></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Insurance Company:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=OPTT SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Policy Number:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=OPTV SIZE=30 VALUE=""></TD></TR>
-</TABLE>
-<B><BR><FONT COLOR=DD0000>*</FONT>Please check the box for agreement:</B><P>
-<TABLE>
-<TR><TD align=center valign=top width=50><INPUT TYPE=CHECKBOX NAME=CHECK1E VALUE=YES></TD>
-<TD CLASS=tdcell><BLOCKQUOTE><B>I give my permission for Peachtree Ridge Youth Athletic Association to obtain medical services for my child in the case of medical emergency or injury.</B>
-</BLOCKQUOTE></TD></TR>
-</TABLE>
-<P><HR><P>
-<FONT SIZE=5 COLOR=0000CC><B>IV. COMMUNICATION INFORMATION:</B></FONT>
-<P>
-<B>Please provide e-mail address(es) of an adult or responsible older child who will check for messages regularly during the season. The size of our organization prevents us from relying exclusively on phone or mail for necessary communications.  <!--In addition, we accept only one email per family so please enter the email that works best for you.--></B>
-<P>
-<TABLE WIDTH=600>
-<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Primary E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=emailAddress SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Retype email:</B></TD><TD ALIGN=LEFT><INPUT TYPE=TEXT NAME=email2 SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Click check box if no email address:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=CHECKBOX NAME=LSEASON VALUE=Yes UNCHECKED></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Secondary E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=OPTP SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Retype email:</B></TD><TD ALIGN=LEFT><INPUT TYPE=TEXT NAME=OPTP2 SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Additional E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=OPTU SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Retype email:</B></TD><TD ALIGN=LEFT><INPUT TYPE=TEXT NAME=OPTU2 SIZE=30 VALUE=""></TD></TR>
-</TABLE>
-<P>
-<B>Many of our teams will use the calling post function to manage their teams.  Please provide us with a telephone number that would be best for your family to receive calling post messages about your team.</B>
-<TABLE WIDTH=600>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Calling Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=CALLAREA SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("CALLAREA");>-<INPUT TYPE=TEXT NAME=CALLPHONE1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("CALLPHONE1");>-<INPUT TYPE=TEXT NAME=CALLPHONE2 SIZE=4 MAXLENGTH=4 VALUE=""></TD></TR>
-</TABLE>
-<P>
-<HR>
-<P>
-<FONT SIZE=5 COLOR=0000CC><B>V. BASEBALL INFORMATION:</B></FONT>
+<FONT SIZE=5 COLOR=0000CC><B>III. BASEBALL INFORMATION:</B></FONT>
 <P>
 <B>Players uniforms will include Jersey, Pants, Socks, Hat and Belt. 
 <BR><BR>Uniforms are sized to match typical youth and adult sizes. If you have questions regarding your child's size requirements, please visit Colters Sporting Goods.</B>
@@ -434,7 +399,7 @@ FONT {
 <OPTION VALUE="Adult X-Large">Adult X-Large (40-42 waist)
 <OPTION VALUE="Adult XX-Large">Adult XX-Large (44-46 waist
 </SELECT></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Socks Size: </B></TD><TD><SELECT NAME=sockSize>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Socks Size: </B></TD><TD><SELECT NAME=socksSize>
 <OPTION VALUE="">-CHOOSE-
 <OPTION VALUE="Youth">Youth
 <OPTION VALUE="Adult">Adult
@@ -453,7 +418,7 @@ FONT {
 <HR>
 <P>
 <A NAME="DONATION"></A>
-<FONT SIZE=5 COLOR=0000CC><B>VI. DONATIONS: </B></FONT>
+<FONT SIZE=5 COLOR=0000CC><B>IV. DONATIONS: </B></FONT>
 <P>
 <FONT COLOR=0000CC><B>DONATION:</B></FONT><P>
 <B>Peachtree Ridge Youth Athletic Association is a non-profit organization and we rely solely on registration fees to operate, however, we also accept donations.
@@ -467,10 +432,10 @@ FONT {
 <INPUT TYPE=RADIO NAME=donation VALUE=100> <B>$100.00</B> &nbsp; &nbsp; &nbsp; &nbsp;
 <INPUT TYPE=RADIO NAME=donation VALUE=200> <B>$200.00</B> &nbsp; &nbsp; &nbsp; &nbsp;
 <INPUT TYPE=RADIO NAME=donation VALUE=500> <B>$500.00</B> <P>
-<INPUT TYPE=RADIO NAME=donation VALUE=Other> <B>Other: </B><INPUT TYPE=TEXT NAME=DONOTHER VALUE="" SIZE=4><P>
+<INPUT TYPE=RADIO NAME=donation VALUE=other> <B>Other: </B><INPUT TYPE=TEXT NAME=dother SIZE=4><P>
 <INPUT TYPE=RADIO NAME=donation VALUE=0> <B>I do not wish to donate at this time.</B><P>
 <HR><P>
-<FONT SIZE=5 COLOR=0000CC><B>VII. IMPORTANT POLICY INFORMATION:</B></FONT>
+<FONT SIZE=5 COLOR=0000CC><B>V. IMPORTANT POLICY INFORMATION:</B></FONT>
 <P>
 <FONT COLOR=DD0000>*</FONT><B>By checking the boxes I agree to each of the following.</B>
 <BR>
