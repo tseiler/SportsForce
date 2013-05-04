@@ -300,8 +300,7 @@ FONT {
 <P>
 <TABLE WIDTH=600>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Number of Seasons Played: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=seasons>
-<OPTION VALUE="">
-<OPTION VALUE="0">0
+<OPTION VALUE="0" SELECTED>0
 <OPTION VALUE="1">1
 <OPTION VALUE="2">2
 <OPTION VALUE="3">3
@@ -317,8 +316,7 @@ FONT {
 </SELECT></TD></TR>
 <%-- Primary position --%>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Primary Position: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=priPos>
-<OPTION VALUE="">
-<OPTION VALUE="">None
+<OPTION VALUE="None" SELECTED>None
 <OPTION VALUE="P">P
 <OPTION VALUE="C">C
 <OPTION VALUE="1B">1B
@@ -331,8 +329,7 @@ FONT {
 </SELECT></TD></TR>
 <%-- Secondary position --%>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000></FONT><B>Secondary Position: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=secPos>
-<OPTION VALUE="">
-<OPTION VALUE="">None
+<OPTION VALUE="None" SELECTED>None
 <OPTION VALUE="P">P
 <OPTION VALUE="C">C
 <OPTION VALUE="1B">1B
@@ -345,8 +342,7 @@ FONT {
 </SELECT></TD></TR>
 <%-- Additional position --%>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000></FONT><B>Additional Position: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=addPos>
-<OPTION VALUE="">
-<OPTION VALUE="">None
+<OPTION VALUE="None" SELECTED>None
 <OPTION VALUE="P">P
 <OPTION VALUE="C">C
 <OPTION VALUE="1B">1B
@@ -359,20 +355,17 @@ FONT {
 </SELECT></TD></TR>
 <%-- Pitching Experience --%>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000></FONT><B>Pitching Experience: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=pitcherExp>
-<OPTION VALUE="">
-<OPTION VALUE="false">No
+<OPTION VALUE="false" SELECTED>No
 <OPTION VALUE="true">Yes
 </SELECT></TD></TR>
 <%-- Catcher Experience --%>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000></FONT><B>Catcher Experience: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=catcherExp>
-<OPTION VALUE="">
-<OPTION VALUE="false">No
+<OPTION VALUE="false" SELECTED>No
 <OPTION VALUE="true">Yes
 </SELECT></TD></TR>
 <%-- Own Catcher's Gear --%>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000></FONT><B>Do you own a full set of catcher's gear?: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=catcherGear>
-<OPTION VALUE="">
-<OPTION VALUE="false">No
+<OPTION VALUE="false" SELECTED>No
 <OPTION VALUE="true">Yes
 </SELECT></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Jersey Size: </B></TD><TD><SELECT NAME=jerseySize>
