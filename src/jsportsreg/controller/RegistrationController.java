@@ -9,9 +9,11 @@ import jsportsreg.entity.*;
 import jsportsreg.helper.RegistrationDBHelper;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -155,7 +157,7 @@ public class RegistrationController extends HttpServlet {
 		// Used to display donation values in dollar currency
 		DecimalFormat d = new DecimalFormat("'$'0.00");
 		
-		// Hand Other donation values
+		// Handle Other donation values
 		if (request.getParameter("donation").matches("other"))
 			donation = Double.parseDouble(request.getParameter("dother"));
 		else
@@ -199,8 +201,10 @@ public class RegistrationController extends HttpServlet {
 		 * @author Adrian Robinson
 		 */
 		
-		Address playerAddress = new Address(0, addressStreet, addressCity, addressState, 
+		Address playerAddress = new Address(-1, addressStreet, addressCity, addressState, 
 				addressPostalCode, addressCounty, player);
+		
+		//player.addAddress(playerAddress);
 
 		/*
 		 *  Create a guardian 1 Person object
@@ -211,6 +215,8 @@ public class RegistrationController extends HttpServlet {
 				middleName, g1mobilePhone, nickName,
 				g1role, suffixName, g1workPhone, addresses, emergencyContacts,
 				playerRegistrations);
+		
+		//player.addEmergencyContact(guardian1);
 
 		/*
 		 *  Create a guardian 2 Person object
@@ -222,6 +228,8 @@ public class RegistrationController extends HttpServlet {
 				g2role, suffixName, g2workPhone, addresses, emergencyContacts,
 				playerRegistrations);
 
+		//player.addEmergencyContact(guardian2);
+		
 		/*
 		 *  Create a registration Player_Registration object
 		 *  @author Adrian Robinson
@@ -232,9 +240,139 @@ public class RegistrationController extends HttpServlet {
 				jersey2, jerseySize, lateFee, liabilityWaiver, outOfCountyFee, pantSize,
 				photoWaiver, pitchingExperience, primaryPosition, refundAmount, refundPolicy,
 				seasonsPlayed, secondaryPosition, socksSize, totalFees, uniformCampFee,
-				division, personreg);
-
-		// TODO Add address and contact code
+				division, player);
+		
+		//Test block
+		// Add Registration DBHelper code
+		RegistrationDBHelper instance0 = new RegistrationDBHelper();
+		
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+		
+		Date tDate1 = null;
+		try {
+			tDate1 = df.parse("6-1-2013");
+		} catch (ParseException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
+		Date tDate2 = null;
+		try {
+			tDate2 = df.parse("8-30-2013");
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+				
+		Season seasonVerify1 = new Season(789670000, tDate2, "Summer 2013", tDate1, new ArrayList<Division>() );
+				
+		Sport sportVerify1 = new Sport(123233000, "Baseball", "Baseball", new ArrayList<Division>() );
+		
+		Division d0 = new Division(1, "Major 11 & 12 year olds", "Major 11 & 12 year olds", 
+				seasonVerify1, sportVerify1, new ArrayList<Player_Registration>() );
+		
+		// Create Player Registration object
+		Player_Registration pr0 = new Player_Registration();
+		
+		// Create Player Object
+		Person p0 = new Person();
+		
+		// Add form data to Player object - WORKING
+		p0.setFirstName(pfirstName);
+		p0.setMiddleName(middleName);
+		p0.setLastName(plastName);
+		p0.setSuffixName(suffixName);
+		p0.setNickName(nickName);
+		p0.setBirthDate(birthDate);
+		p0.setGender(gender);
+		p0.setRole("Player");
+		p0.setWorkPhone("404-555-1234");
+		p0.setHomePhone(phomePhone);
+		p0.setMobilePhone("404-555-4321");
+		p0.setEmailAddress(pemailAddress);
+		
+		// Create Address object
+		Address addr0 = new Address();
+		
+		// Add form data to address object - WORKING
+		addr0.setAddressStreet(addressStreet);
+		addr0.setAddressCity(addressCity);
+		addr0.setAddressState(addressState);
+		addr0.setAddressPostalCode(addressPostalCode);
+		addr0.setAddressCounty(addressCounty);
+		
+		// Associate address to player - WORKING
+		p0.addAddress(addr0);
+				
+		// Create guardian 1
+		Person p1 = new Person();
+		
+		// Add form data to guardian 1 object
+		p1.setFirstName(g1firstName);
+		p1.setLastName(g1lastName);
+		p1.setRole(g1role);
+		p1.setWorkPhone(g1workPhone);
+		p1.setHomePhone(g1homePhone);
+		p1.setMobilePhone(g1mobilePhone);
+		p1.setEmailAddress(g1emailAddress);
+		
+		
+		// Create guardian 2
+		Person p2 = new Person();
+		
+		// Add form data to guardian 2 object
+		p2.setFirstName(g2firstName);
+		p2.setLastName(g2lastName);		
+		p2.setRole(g2role);
+		p2.setWorkPhone(g2workPhone);
+		p2.setHomePhone(g2homePhone);
+		p2.setMobilePhone(g2mobilePhone);
+		p2.setEmailAddress(g2emailAddress);
+		
+		// Add guardian 1 and 2 to the player object - NOT WORKING
+		p0.addEmergencyContact(p1);
+		p0.addEmergencyContact(p2);
+		
+		// Add the player object to the registration object - NOT WORKING
+		pr0.setPerson(p0);
+		
+		// Set the registration object attributes
+		pr0.setDivision(d0);
+		pr0.setAdditionalPosition(additionalPosition);
+		pr0.setBalance(500.00);
+		pr0.setBaseFee(200.00);
+		pr0.setByLawsAgreement(byLawsAgreement);
+		pr0.setCatchingExperience(catchingExperience);
+		pr0.setCatchingGear(catchingGear);
+		pr0.setCodeOfConduct(codeOfConduct);
+		pr0.setDiscount(15.00);
+		pr0.setDonation(55.00);
+		pr0.setFundraisingFee(35.00);
+		pr0.setHatSize(hatSize);
+		pr0.setJersey1(jersey1);
+		pr0.setJersey2(jersey2);
+		pr0.setJerseySize(jerseySize);
+		pr0.setLateFee(2.00);
+		pr0.setLiabilityWaiver(liabilityWaiver);
+		pr0.setOutOfCountyFee(20.00);
+		pr0.setPantSize(pantSize);
+		pr0.setPhotoWaiver(photoWaiver);
+		pr0.setPitchingExperience(pitchingExperience);
+		pr0.setPrimaryPosition(primaryPosition);
+		pr0.setRefundAmount(0.00);
+		pr0.setRefundPolicy(refundPolicy);
+		pr0.setSeasonsPlayed(seasonsPlayed);
+		pr0.setSecondaryPosition(secondaryPosition);
+		pr0.setSocksSize(socksSize);
+		pr0.setTotalFees(325.00);
+		pr0.setUniformCampFee(25.50);
+		
+		// Add the registration to the DB - NOT WORKING
+		instance0.setPassPhrase("test123456");
+		instance0.setPlayer_Registration(pr0);
+		
+		
+		// Add player person object to DB
+		//instance0.setPlayer_Registration(registration);
 
 		/*
 		 *  Send data to confirmation.jsp for display
