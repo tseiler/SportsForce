@@ -318,7 +318,7 @@ FONT {
 <%-- Primary position --%>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Primary Position: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=priPos>
 <OPTION VALUE="">
-<OPTION VALUE="None">None
+<OPTION VALUE="">None
 <OPTION VALUE="P">P
 <OPTION VALUE="C">C
 <OPTION VALUE="1B">1B
@@ -332,7 +332,7 @@ FONT {
 <%-- Secondary position --%>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000></FONT><B>Secondary Position: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=secPos>
 <OPTION VALUE="">
-<OPTION VALUE="None">None
+<OPTION VALUE="">None
 <OPTION VALUE="P">P
 <OPTION VALUE="C">C
 <OPTION VALUE="1B">1B
@@ -346,7 +346,7 @@ FONT {
 <%-- Additional position --%>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000></FONT><B>Additional Position: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=addPos>
 <OPTION VALUE="">
-<OPTION VALUE="None">None
+<OPTION VALUE="">None
 <OPTION VALUE="P">P
 <OPTION VALUE="C">C
 <OPTION VALUE="1B">1B
@@ -377,14 +377,14 @@ FONT {
 </SELECT></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Jersey Size: </B></TD><TD><SELECT NAME=jerseySize>
 <OPTION VALUE="">-CHOOSE-
-<OPTION VALUE="Youth Small (6-8)">Youth Small (6-8)
-<OPTION VALUE="Youth Medium (10-12)">Youth Medium (10-12)
-<OPTION VALUE="Youth Large (14-16)">Youth Large (14-16)
-<OPTION VALUE="Youth XL (18-20)">Youth XL (18-20)
-<OPTION VALUE="Adult Medium (38-40 Chest)">Adult Medium (38-40 Chest)
-<OPTION VALUE="Adult Large (42-44 Chest)">Adult Large (42-44 Chest)
-<OPTION VALUE="Adult XL (46 Chest)">Adult XL (46 Chest)
-<OPTION VALUE="Adult XXL (48 Chest)">Adult XXL (48 Chest)
+<OPTION VALUE="Youth Small">Youth Small (6-8)
+<OPTION VALUE="Youth Medium">Youth Medium (10-12)
+<OPTION VALUE="Youth Large">Youth Large (14-16)
+<OPTION VALUE="Youth XL">Youth XL (18-20)
+<OPTION VALUE="Adult Medium">Adult Medium (38-40 Chest)
+<OPTION VALUE="Adult Large">Adult Large (42-44 Chest)
+<OPTION VALUE="Adult XL">Adult XL (46 Chest)
+<OPTION VALUE="Adult XXL">Adult XXL (48 Chest)
 </SELECT></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Pants Size: </B></TD><TD><SELECT NAME=pantSize>
 <OPTION VALUE="">-CHOOSE-
@@ -392,12 +392,12 @@ FONT {
 <OPTION VALUE="Youth Small">Youth Small (22-24 waist)
 <OPTION VALUE="Youth Medium">Youth Medium (24-26 waist)
 <OPTION VALUE="Youth Large">Youth Large (27-29 waist)
-<OPTION VALUE="Youth X-Large">Youth X-Large (30-32 waist)
+<OPTION VALUE="Youth XL">Youth X-Large (30-32 waist)
 <OPTION VALUE="Adult Small">Adult Small (28-30 waist)
 <OPTION VALUE="Adult Medium">Adult Medium (32-34 waist)
 <OPTION VALUE="Adult Large">Adult Large (36-38 waist)
-<OPTION VALUE="Adult X-Large">Adult X-Large (40-42 waist)
-<OPTION VALUE="Adult XX-Large">Adult XX-Large (44-46 waist
+<OPTION VALUE="Adult XL">Adult X-Large (40-42 waist)
+<OPTION VALUE="Adult XXL">Adult XX-Large (44-46 waist
 </SELECT></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Socks Size: </B></TD><TD><SELECT NAME=socksSize>
 <OPTION VALUE="">-CHOOSE-

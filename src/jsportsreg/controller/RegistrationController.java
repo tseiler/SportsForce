@@ -276,7 +276,7 @@ public class RegistrationController extends HttpServlet {
 		// Create Player Object
 		Person p0 = new Person();
 		
-		// Add form data to Player object - WORKING
+		// Add form data to Player object
 		p0.setFirstName(pfirstName);
 		p0.setMiddleName(middleName);
 		p0.setLastName(plastName);
@@ -293,14 +293,14 @@ public class RegistrationController extends HttpServlet {
 		// Create Address object
 		Address addr0 = new Address();
 		
-		// Add form data to address object - WORKING
+		// Add form data to address object
 		addr0.setAddressStreet(addressStreet);
 		addr0.setAddressCity(addressCity);
 		addr0.setAddressState(addressState);
 		addr0.setAddressPostalCode(addressPostalCode);
 		addr0.setAddressCounty(addressCounty);
 		
-		// Associate address to player - WORKING
+		// Associate address to player
 		p0.addAddress(addr0);
 				
 		// Create guardian 1
@@ -315,6 +315,14 @@ public class RegistrationController extends HttpServlet {
 		p1.setMobilePhone(g1mobilePhone);
 		p1.setEmailAddress(g1emailAddress);
 		
+		// Set correct contact gender if Parent, use "Other" for Guardian
+		
+		if (g1role.matches("Father"))
+			p1.setGender("Male");
+		else if (g1role.matches("Mother"))
+			p1.setGender("Female");
+		else
+			p1.setGender("Other");
 		
 		// Create guardian 2
 		Person p2 = new Person();
@@ -328,11 +336,20 @@ public class RegistrationController extends HttpServlet {
 		p2.setMobilePhone(g2mobilePhone);
 		p2.setEmailAddress(g2emailAddress);
 		
-		// Add guardian 1 and 2 to the player object - NOT WORKING
+		// Set correct contact gender if Parent, use "Other" for Guardian
+		
+		if (g2role.matches("Father"))
+			p2.setGender("Male");
+		else if (g2role.matches("Mother"))
+			p2.setGender("Female");
+		else
+			p2.setGender("Other");
+		
+		// Add guardian 1 and 2 to the player object
 		p0.addEmergencyContact(p1);
 		p0.addEmergencyContact(p2);
 		
-		// Add the player object to the registration object - NOT WORKING
+		// Add the player object to the registration object
 		pr0.setPerson(p0);
 		
 		// Set the registration object attributes
@@ -366,7 +383,7 @@ public class RegistrationController extends HttpServlet {
 		pr0.setTotalFees(325.00);
 		pr0.setUniformCampFee(25.50);
 		
-		// Add the registration to the DB - NOT WORKING
+		// Add the registration to the DB
 		instance0.setPassPhrase("test123456");
 		instance0.setPlayer_Registration(pr0);
 		
