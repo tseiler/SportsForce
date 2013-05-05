@@ -9,6 +9,7 @@
 <body>
 
 <h1>Player Registration Confirmation Page</h1>
+<p>Confirmation Number: <%= request.getAttribute("registrationID") %></p>
 Player:  
 <%= request.getAttribute("pfirstName") %>
 <%= request.getAttribute("middleName") %>
