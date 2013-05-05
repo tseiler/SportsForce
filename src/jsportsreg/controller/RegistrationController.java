@@ -244,6 +244,7 @@ public class RegistrationController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		// Create Division object for Player_Registration
 		Division d0 = new Division(divId, ageGroup, ageGroup, seasonVerify1, sportVerify1, new ArrayList<Player_Registration>() );
 			
 		
@@ -389,7 +390,10 @@ public class RegistrationController extends HttpServlet {
 		// Add the registration to the DB
 		instance0.setPassPhrase("test123456");
 		instance0.setPlayer_Registration(pr0);
+		registrationID = instance0.getRegistrationID();
 		
+		if (nickName != "")
+			nickName = "(" + nickName + ")";
 		
 		/*
 		 *  Send data to confirmation.jsp for display
@@ -399,6 +403,7 @@ public class RegistrationController extends HttpServlet {
 		ServletContext ctx = this.getServletContext();
 		RequestDispatcher dispatcher = ctx.getRequestDispatcher("/confirmation.jsp");
 
+		request.setAttribute("registrationID", registrationID);
 		request.setAttribute("pfirstName", pfirstName);
 		request.setAttribute("middleName", middleName);
 		request.setAttribute("plastName", plastName);
@@ -449,6 +454,8 @@ public class RegistrationController extends HttpServlet {
 		/*
 		 *   Debug console output
 		 */
+		
+		System.out.println("Confirmation Number: " + registrationID);
 		System.out.println("Player Info:");
 		System.out.println(p0.getFirstName());
 		System.out.println(p0.getMiddleName());
