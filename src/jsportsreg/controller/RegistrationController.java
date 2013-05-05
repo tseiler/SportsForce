@@ -64,8 +64,7 @@ public class RegistrationController extends HttpServlet {
 		// Create Player_Registration object to store registration info
 		Player_Registration pr = new Player_Registration();
 		// Add player registration info to database
-		//rDBHelper.addPlayer_Registration(pr);
-    		    
+		//rDBHelper.addPlayer_Registration(pr);   		    
     		    
     }
 
@@ -164,14 +163,11 @@ public class RegistrationController extends HttpServlet {
 			donation = Double.parseDouble(request.getParameter("donation"));
 
 		
-		// TODO set correct division based on birthDate
-		Division division = new Division();
-
-
 		/*
 		 *  Convert birthDate String to Java Date
 		 *  @author Adrian Robinson
 		 */
+		
 		try {
 			birthDate = new SimpleDateFormat("MM/dd/yy").parse(birth);
 		} catch (ParseException e) {
@@ -179,70 +175,7 @@ public class RegistrationController extends HttpServlet {
 			e.printStackTrace();
 		}
 
-
-		/*
-		 *  Create a player Person object
-		 *  @author Adrian Robinson
-		 */
-		Person player = new Person(personID, birthDate, pemailAddress,
-				pfirstName, gender, phomePhone, plastName,
-				middleName, "", nickName,
-				"", suffixName, "", addresses, emergencyContacts,
-				playerRegistrations);
-
-		/*
-		 *  Person object to be used with Player_Registration object
-		 *  @author Adrian Robinson
-		 */
-		Person personreg = player;
 		
-		/*
-		 * Address object to be used with @param player Person object
-		 * @author Adrian Robinson
-		 */
-		
-		Address playerAddress = new Address(-1, addressStreet, addressCity, addressState, 
-				addressPostalCode, addressCounty, player);
-		
-		//player.addAddress(playerAddress);
-
-		/*
-		 *  Create a guardian 1 Person object
-		 *  @author Adrian Robinson
-		 */
-		Person guardian1 = new Person(personID, birthDate, g1emailAddress,
-				g1firstName, gender, g1homePhone, g1lastName,
-				middleName, g1mobilePhone, nickName,
-				g1role, suffixName, g1workPhone, addresses, emergencyContacts,
-				playerRegistrations);
-		
-		//player.addEmergencyContact(guardian1);
-
-		/*
-		 *  Create a guardian 2 Person object
-		 *  @author Adrian Robinson
-		 */
-		Person guardian2 = new Person(personID, birthDate, g2emailAddress,
-				g2firstName, gender, g2homePhone, g2lastName,
-				middleName, g2mobilePhone, nickName,
-				g2role, suffixName, g2workPhone, addresses, emergencyContacts,
-				playerRegistrations);
-
-		//player.addEmergencyContact(guardian2);
-		
-		/*
-		 *  Create a registration Player_Registration object
-		 *  @author Adrian Robinson
-		 */
-		Player_Registration registration = new Player_Registration(registrationID, additionalPosition,
-				balance, baseFee, byLawsAgreement, catchingExperience, catchingGear,
-				codeOfConduct, discount, donation, fundraisingFee, hatSize, jersey1,
-				jersey2, jerseySize, lateFee, liabilityWaiver, outOfCountyFee, pantSize,
-				photoWaiver, pitchingExperience, primaryPosition, refundAmount, refundPolicy,
-				seasonsPlayed, secondaryPosition, socksSize, totalFees, uniformCampFee,
-				division, player);
-		
-		//Test block
 		// Add Registration DBHelper code
 		RegistrationDBHelper instance0 = new RegistrationDBHelper();
 		
@@ -267,11 +200,60 @@ public class RegistrationController extends HttpServlet {
 				
 		Sport sportVerify1 = new Sport(123233000, "Baseball", "Baseball", new ArrayList<Division>() );
 		
-		Division d0 = new Division(1, "Major 11 & 12 year olds", "Major 11 & 12 year olds", 
-				seasonVerify1, sportVerify1, new ArrayList<Player_Registration>() );
+		/*
+		 *  Determine Age Group from birthDate
+		 *  @author Adrian Robinson
+		 */
+		String ageGroup = "";
+		int divId = 0;
+		
+		try {
+			
+			if (birthDate.after(new SimpleDateFormat("MM/dd/yy").parse("04/30/2006")) && birthDate.before(new SimpleDateFormat("MM/dd/yy").parse("05/01/2008"))) {
+				ageGroup = "Tball 5 & 6 year olds";
+				divId = 5;
+			}
+				
+			else if (birthDate.after(new SimpleDateFormat("MM/dd/yy").parse("04/30/2004")) && birthDate.before(new SimpleDateFormat("MM/dd/yy").parse("05/01/2006"))) {
+				ageGroup = "PeeWee 7 & 8 year olds";
+				divId = 9;				
+			}
+				
+			else if (birthDate.after(new SimpleDateFormat("MM/dd/yy").parse("04/30/2002")) && birthDate.before(new SimpleDateFormat("MM/dd/yy").parse("05/01/2004"))) {
+				ageGroup = "Minor 9 & 10 year olds";
+				divId = 4;
+			}
+				
+			else if (birthDate.after(new SimpleDateFormat("MM/dd/yy").parse("04/30/2000")) && birthDate.before(new SimpleDateFormat("MM/dd/yy").parse("05/01/2002"))) {
+				ageGroup = "Major 11 & 12 year olds";
+				divId = 1;
+			}
+				
+			else if (birthDate.after(new SimpleDateFormat("MM/dd/yy").parse("04/30/1998")) && birthDate.before(new SimpleDateFormat("MM/dd/yy").parse("05/01/2000"))) {
+				ageGroup = "Pony 13 & 14 year olds";
+				divId = 12;
+			}
+				
+			else {
+				ageGroup = "Seniors 15 thru 18 year olds";
+				divId = 8;
+			}
+				
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Division d0 = new Division(divId, ageGroup, ageGroup, seasonVerify1, sportVerify1, new ArrayList<Player_Registration>() );
+			
 		
 		// Create Player Registration object
 		Player_Registration pr0 = new Player_Registration();
+		
+		/*
+		 *  Person object to be used with Player_Registration object
+		 *  @author Adrian Robinson
+		 */
 		
 		// Create Player Object
 		Person p0 = new Person();
@@ -290,6 +272,11 @@ public class RegistrationController extends HttpServlet {
 		p0.setMobilePhone("404-555-4321");
 		p0.setEmailAddress(pemailAddress);
 		
+		/*
+		 * Address object to be used with @param player Person object
+		 * @author Adrian Robinson
+		 */
+		
 		// Create Address object
 		Address addr0 = new Address();
 		
@@ -303,10 +290,15 @@ public class RegistrationController extends HttpServlet {
 		// Associate address to player
 		p0.addAddress(addr0);
 				
-		// Create guardian 1
-		Person p1 = new Person();
+				
+		/*
+		 *  Create guardian 1
+		 *  Add form data to guardian 1 object
+		 *  @author Adrian Robinson
+		 */
 		
-		// Add form data to guardian 1 object
+		Person p1 = new Person();
+				
 		p1.setFirstName(g1firstName);
 		p1.setLastName(g1lastName);
 		p1.setRole(g1role);
@@ -324,7 +316,11 @@ public class RegistrationController extends HttpServlet {
 		else
 			p1.setGender("Other");
 		
-		// Create guardian 2
+		/*
+		 *  Create guardian 2
+		 *  Add form data to guardian 2 object
+		 *  @author Adrian Robinson
+		 */
 		Person p2 = new Person();
 		
 		// Add form data to guardian 2 object
@@ -336,7 +332,10 @@ public class RegistrationController extends HttpServlet {
 		p2.setMobilePhone(g2mobilePhone);
 		p2.setEmailAddress(g2emailAddress);
 		
-		// Set correct contact gender if Parent, use "Other" for Guardian
+		/*
+		 *  Set correct contact gender if Parent, use "Other" for Guardian
+		 *  @author Adrian Robinson
+		 */
 		
 		if (g2role.matches("Father"))
 			p2.setGender("Male");
@@ -352,7 +351,11 @@ public class RegistrationController extends HttpServlet {
 		// Add the player object to the registration object
 		pr0.setPerson(p0);
 		
-		// Set the registration object attributes
+		/*
+		 *  Set the registration object attributes
+		 *  @author Adrian Robinson
+		 */
+	
 		pr0.setDivision(d0);
 		pr0.setAdditionalPosition(additionalPosition);
 		pr0.setBalance(500.00);
@@ -388,9 +391,6 @@ public class RegistrationController extends HttpServlet {
 		instance0.setPlayer_Registration(pr0);
 		
 		
-		// Add player person object to DB
-		//instance0.setPlayer_Registration(registration);
-
 		/*
 		 *  Send data to confirmation.jsp for display
 		 *  @author Adrian Robinson
@@ -450,49 +450,50 @@ public class RegistrationController extends HttpServlet {
 		 *   Debug console output
 		 */
 		System.out.println("Player Info:");
-		System.out.println(player.getFirstName());
-		System.out.println(player.getMiddleName());
-		System.out.println(player.getLastName());
-		System.out.println(player.getSuffixName());
-		System.out.println(player.getNickName());
-		System.out.println(player.getGender());
-		System.out.println(player.getBirthDate());
-		System.out.println(player.getHomePhone());
+		System.out.println(p0.getFirstName());
+		System.out.println(p0.getMiddleName());
+		System.out.println(p0.getLastName());
+		System.out.println(p0.getSuffixName());
+		System.out.println(p0.getNickName());
+		System.out.println(p0.getGender());
+		System.out.println(p0.getBirthDate());
+		System.out.println(p0.getHomePhone());
 		System.out.println("");
 
 		System.out.println("Registration Info:");
-		System.out.println(registration.getSeasonsPlayed());
-		System.out.println(registration.getPrimaryPosition());
-		System.out.println(registration.getSecondaryPosition());
-		System.out.println(registration.getAdditionalPosition());
-		System.out.println(registration.getPitchingExperience());
-		System.out.println(registration.getCatchingExperience());
-		System.out.println(registration.getCatchingGear());
-		System.out.println(registration.getJerseySize());
-		System.out.println(registration.getPantSize());
-		System.out.println(registration.getSocksSize());
-		System.out.println(registration.getHatSize());
-		System.out.println(registration.getJersey1());
-		System.out.println(registration.getJersey2());
+		System.out.println(pr0.getSeasonsPlayed());
+		System.out.println(pr0.getPrimaryPosition());
+		System.out.println(pr0.getSecondaryPosition());
+		System.out.println(pr0.getAdditionalPosition());
+		System.out.println(pr0.getPitchingExperience());
+		System.out.println(pr0.getCatchingExperience());
+		System.out.println(pr0.getCatchingGear());
+		System.out.println(pr0.getJerseySize());
+		System.out.println(pr0.getPantSize());
+		System.out.println(pr0.getSocksSize());
+		System.out.println(pr0.getHatSize());
+		System.out.println(pr0.getJersey1());
+		System.out.println(pr0.getJersey2());
 		System.out.println("");
 
 		System.out.println("Guardian 1 Info:");
-		System.out.println(guardian1.getFirstName());
-		System.out.println(guardian1.getLastName());
-		System.out.println(guardian1.getHomePhone());
-		System.out.println(guardian1.getWorkPhone());
-		System.out.println(guardian1.getRole());
+		System.out.println(p1.getFirstName());
+		System.out.println(p1.getLastName());
+		System.out.println(p1.getHomePhone());
+		System.out.println(p1.getWorkPhone());
+		System.out.println(p1.getRole());
 		System.out.println("");
 
 		System.out.println("Guardian 2 Info:");
-		System.out.println(guardian2.getFirstName());
-		System.out.println(guardian2.getLastName());
-		System.out.println(guardian2.getHomePhone());
-		System.out.println(guardian2.getWorkPhone());
-		System.out.println(guardian2.getRole());
-
-
-
+		System.out.println(p2.getFirstName());
+		System.out.println(p2.getLastName());
+		System.out.println(p2.getHomePhone());
+		System.out.println(p2.getWorkPhone());
+		System.out.println(p2.getRole());
+		
+		System.out.println(ageGroup);
+		System.out.println(divId);
+		
 	}
 	
 }

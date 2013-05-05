@@ -66,7 +66,7 @@ FONT {
 <P><BR>
 </CENTER>
 
-<form method="post" action="RegistrationController">
+<form method="post" action="RegistrationController" name="Reg">
 
 <BLOCKQUOTE>
 <FONT SIZE=5 COLOR="0000CC"><B>I. PLAYER INFORMATION:</B></FONT>
@@ -381,7 +381,7 @@ FONT {
 </SELECT></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Pants Size: </B></TD><TD><SELECT NAME=pantSize>
 <OPTION VALUE="">-CHOOSE-
-<OPTION VALUE="Youth X-Small">Youth X-Small (18-20 waist)
+<OPTION VALUE="Youth XS">Youth X-Small (18-20 waist)
 <OPTION VALUE="Youth Small">Youth Small (22-24 waist)
 <OPTION VALUE="Youth Medium">Youth Medium (24-26 waist)
 <OPTION VALUE="Youth Large">Youth Large (27-29 waist)
@@ -390,7 +390,7 @@ FONT {
 <OPTION VALUE="Adult Medium">Adult Medium (32-34 waist)
 <OPTION VALUE="Adult Large">Adult Large (36-38 waist)
 <OPTION VALUE="Adult XL">Adult X-Large (40-42 waist)
-<OPTION VALUE="Adult XXL">Adult XX-Large (44-46 waist
+<OPTION VALUE="Adult XXL">Adult XX-Large (44-46 waist)
 </SELECT></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Socks Size: </B></TD><TD><SELECT NAME=socksSize>
 <OPTION VALUE="">-CHOOSE-
