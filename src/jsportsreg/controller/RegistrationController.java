@@ -58,15 +58,73 @@ public class RegistrationController extends HttpServlet {
 		if (%%% != null && (%%% = %%%.trim()).length() != 0) {
     		    	
 		}
-    		*/    
-		// Create RegistrationDBHelper object to interact with database
-		RegistrationDBHelper rDBHelper = new RegistrationDBHelper();
-		// Create Player_Registration object to store registration info
-		Player_Registration pr = new Player_Registration();
-		// Add player registration info to database
-		//rDBHelper.addPlayer_Registration(pr);   		    
-    		    
-    }
+    	*/    
+			
+		/*
+		 * Retrieve player registration data for the update.jsp page
+		 * @author Adrian Robinson
+		 */
+		
+		// Retrieve player registration
+		RegistrationDBHelper instance1 = new RegistrationDBHelper();
+		instance1.setPassPhrase("test123456");
+		instance1.setRegistrationID(Integer.parseInt(request.getParameter("registrationID")));
+		
+		// Set request parameters to send to response
+		
+		ServletContext ctx1 = this.getServletContext();
+		RequestDispatcher dispatcher = ctx1.getRequestDispatcher("/update.jsp");
+
+		request.setAttribute("registrationID", request.getParameter("registrationID"));
+		request.setAttribute("pfirstName", instance1.getPlayer_Registration().getPerson().getFirstName());
+		request.setAttribute("middleName", instance1.getPlayer_Registration().getPerson().getMiddleName());
+		request.setAttribute("plastName", instance1.getPlayer_Registration().getPerson().getLastName());
+		request.setAttribute("suffix", instance1.getPlayer_Registration().getPerson().getSuffixName());
+		request.setAttribute("nickName", instance1.getPlayer_Registration().getPerson().getNickName());
+		request.setAttribute("gender", instance1.getPlayer_Registration().getPerson().getGender());
+		request.setAttribute("birth", instance1.getPlayer_Registration().getPerson().getBirthDate());
+		request.setAttribute("phomePhone", instance1.getPlayer_Registration().getPerson().getHomePhone());
+		request.setAttribute("street", instance1.getPlayer_Registration().getPerson().getAddresses().get(0).getAddressStreet());
+		request.setAttribute("city", instance1.getPlayer_Registration().getPerson().getAddresses().get(0).getAddressCity());
+		request.setAttribute("state", instance1.getPlayer_Registration().getPerson().getAddresses().get(0).getAddressState());
+		request.setAttribute("county", instance1.getPlayer_Registration().getPerson().getAddresses().get(0).getAddressCounty());
+		request.setAttribute("zipCode", instance1.getPlayer_Registration().getPerson().getAddresses().get(0).getAddressPostalCode());
+		
+		request.setAttribute("seasons", instance1.getPlayer_Registration().getSeasonsPlayed());
+		request.setAttribute("priPos", instance1.getPlayer_Registration().getPrimaryPosition());
+		request.setAttribute("secPos", instance1.getPlayer_Registration().getSecondaryPosition());
+		request.setAttribute("addPos", instance1.getPlayer_Registration().getAdditionalPosition());
+		request.setAttribute("pitcherExp", instance1.getPlayer_Registration().getPitchingExperience());
+		request.setAttribute("catcherExp", instance1.getPlayer_Registration().getCatchingExperience());
+		request.setAttribute("catcherGear", instance1.getPlayer_Registration().getCatchingGear());
+		request.setAttribute("jerseySize", instance1.getPlayer_Registration().getJerseySize());
+		request.setAttribute("pantSize", instance1.getPlayer_Registration().getPantSize());
+		request.setAttribute("socksSize", instance1.getPlayer_Registration().getSocksSize());
+		request.setAttribute("hatSize", instance1.getPlayer_Registration().getHatSize());
+		request.setAttribute("jersey1", instance1.getPlayer_Registration().getJersey1());
+		request.setAttribute("jersey2", instance1.getPlayer_Registration().getJersey2());
+		
+		// Get registration's player record, then retrieve emergency contacts, if any
+		if (!instance1.getPlayer_Registration().getPerson().getEmergencyContacts().isEmpty()) {
+			request.setAttribute("g1firstName", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(0).getFirstName());
+			request.setAttribute("g1lastName", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(0).getLastName());
+			request.setAttribute("g1homePhone", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(0).getHomePhone());
+			request.setAttribute("g1workPhone", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(0).getWorkPhone());
+			request.setAttribute("g1mobilePhone", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(0).getMobilePhone());
+			request.setAttribute("g1emailAddress", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(0).getEmailAddress());
+			request.setAttribute("g1role", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(0).getRole());
+			request.setAttribute("g2firstName", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(1).getFirstName());
+			request.setAttribute("g2lastName", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(1).getLastName());
+			request.setAttribute("g2homePhone", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(1).getHomePhone());
+			request.setAttribute("g2workPhone", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(1).getWorkPhone());
+			request.setAttribute("g2mobilePhone", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(1).getMobilePhone());
+			request.setAttribute("g2emailAddress", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(1).getEmailAddress());
+			request.setAttribute("g2role", instance1.getPlayer_Registration().getPerson().getEmergencyContacts().get(1).getRole());
+			//request.setAttribute("donation", d.format(donation));			
+		} // end of if
+
+		dispatcher.forward(request,response);    		    
+    } // end of doGet
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -239,7 +297,9 @@ public class RegistrationController extends HttpServlet {
 				divId = 8;
 			}
 				
-		} catch (ParseException e) {
+		} // end of try
+		
+		catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

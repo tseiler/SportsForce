@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+
 <html>
 <head>
 <title>Player Registration</title>
@@ -72,12 +73,12 @@ FONT {
 <FONT SIZE=5 COLOR="0000CC"><B>I. PLAYER INFORMATION:</B></FONT>
 <P>
 <TABLE WIDTH=600>
-<TR><TD ALIGN=RIGHT valign=top CLASS=tdcell width=300><FONT COLOR=DD0000>*</FONT><B>First Name<BR>(EXACTLY AS SHOWN ON BIRTH CERTIFICATE): </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=pfirstName SIZE=20 MAXLENGTH=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT valign=top CLASS=tdcell width=300><B>Middle Name<BR>(EXACTLY AS SHOWN ON BIRTH CERTIFICATE): </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=middleName SIZE=20 MAXLENGTH=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT valign=top CLASS=tdcell width=300><FONT COLOR=DD0000>*</FONT><B>Last Name<BR>(EXACTLY AS SHOWN ON BIRTH CERTIFICATE): </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=plastName SIZE=20 MAXLENGTH=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Suffix: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=suffix SIZE=20 MAXLENGTH=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Nickname: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=nickName SIZE=20 MAXLENGTH=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Gender: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=gender>
+<TR><TD ALIGN=RIGHT valign=top CLASS=tdcell width=300><FONT COLOR=DD0000>*</FONT><B>First Name<BR>(EXACTLY AS SHOWN ON BIRTH CERTIFICATE): </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=pfirstName SIZE=20 MAXLENGTH=30 VALUE="<%= request.getAttribute("pfirstName") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT valign=top CLASS=tdcell width=300><B>Middle Name<BR>(EXACTLY AS SHOWN ON BIRTH CERTIFICATE): </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=middleName SIZE=20 MAXLENGTH=30 VALUE="<%= request.getAttribute("middleName") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT valign=top CLASS=tdcell width=300><FONT COLOR=DD0000>*</FONT><B>Last Name<BR>(EXACTLY AS SHOWN ON BIRTH CERTIFICATE): </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=plastName SIZE=20 MAXLENGTH=30 VALUE="<%= request.getAttribute("plastName") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Suffix: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=suffix SIZE=20 MAXLENGTH=30 VALUE="<%= request.getAttribute("suffix") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Nickname: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=text NAME=nickName SIZE=20 MAXLENGTH=30 VALUE="<%= request.getAttribute("nickName") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Gender: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=gender VALUE="<%= request.getAttribute("gender") %>">
 <OPTION VALUE="CHOOSE">-CHOOSE-
 <OPTION VALUE="Male">Male
 <OPTION VALUE="Female">Female
@@ -153,9 +154,9 @@ FONT {
 <OPTION VALUE="2010">2010
 </SELECT></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Home Phone: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=parea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("parea");>-<INPUT TYPE=TEXT NAME=pphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("pphone1");>-<INPUT TYPE=TEXT NAME=pphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("pphone2");></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Street Address: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME="street" SIZE=30 MAXLENGTH=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>City: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=city SIZE=30 MAXLENGTH=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>County: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=county>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Street Address: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME="street" SIZE=30 MAXLENGTH=30 VALUE="<%= request.getAttribute("street") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>City: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=city SIZE=30 MAXLENGTH=30 VALUE="<%= request.getAttribute("city") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>County: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=county VALUE="<%= request.getAttribute("county") %>">
 <OPTION VALUE=CHOOSE>-CHOOSE-
 <OPTION VALUE="Gwinnett">Gwinnett
 <OPTION VALUE="Barrow">Barrow
@@ -165,7 +166,7 @@ FONT {
 <OPTION VALUE="Hall">Hall
 <OPTION VALUE="Other">Other
 </SELECT></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>State: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=state>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>State: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=state VALUE="<%= request.getAttribute("state") %>">
 <OPTION VALUE=CHOOSE>-CHOOSE-
 <OPTION VALUE="AL">AL
 <OPTION VALUE="AK">AK
@@ -219,7 +220,7 @@ FONT {
 <OPTION VALUE="WI">WI
 <OPTION VALUE="WY">WY
 </SELECT></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Zip Code: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME="zipCode" SIZE=5 MAXLENGTH=5 VALUE="" onkeyup=Phone("zipCode");></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Zip Code: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME="zipCode" SIZE=5 MAXLENGTH=5 VALUE="<%= request.getAttribute("zipCode") %>" onkeyup=Phone("zipCode");></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>School Player Attends: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=school>
 <OPTION VALUE=CHOOSE>-CHOOSE-
 <OPTION VALUE="Burnette Elementary">Burnette Elementary
@@ -259,16 +260,16 @@ FONT {
 <P>
 <CENTER><I><B>Parent/Guardian #1</B></I></CENTER><P>
 <TABLE WIDTH=600>
-<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>First Name:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1firstName SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Last Name: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1lastName SIZE=30 VALUE=""></TD></TR>
+<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>First Name:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1firstName SIZE=30 VALUE="<%= request.getAttribute("g1firstName") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Last Name: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1lastName SIZE=30 VALUE="<%= request.getAttribute("g1lastName") %>"></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Home Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1area SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1area");>-<INPUT TYPE=TEXT NAME=g1phone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1phone1");>-<INPUT TYPE=TEXT NAME=g1phone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g1phone2");></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Work Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1warea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1warea");>-<INPUT TYPE=TEXT NAME=g1wphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1wphone1");>-<INPUT TYPE=TEXT NAME=g1wphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g1wphone2");> &nbsp; </TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Cell Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1marea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1marea");>-<INPUT TYPE=TEXT NAME=g1mphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g1mphone1");>-<INPUT TYPE=TEXT NAME=g1mphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g1mphone2");></TD></TR>
-<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1emailAddress SIZE=30 VALUE=""></TD></TR>
+<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g1emailAddress SIZE=30 VALUE="<%= request.getAttribute("g1emailAddress") %>"></TD></TR>
 <!--
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=OPTP SIZE=30 VALUE=""></TD></TR>
 //-->
-<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Relationship:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=g1role>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Relationship:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=g1role VALUE="<%= request.getAttribute("g1role") %>">
 <OPTION VALUE="CHOOSE">-CHOOSE-
 <OPTION VALUE="Mother">Mother
 <OPTION VALUE="Father">Father
@@ -277,13 +278,13 @@ FONT {
 </TABLE><P>
 <CENTER><I><B>Parent/Guardian #2</B></I></CENTER><P>
 <TABLE WIDTH=600>
-<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><B>First Name:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2firstName SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Last Name: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2lastName SIZE=30 VALUE=""></TD></TR>
+<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><B>First Name:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2firstName SIZE=30 VALUE="<%= request.getAttribute("g2firstName") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Last Name: </B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2lastName SIZE=30 VALUE="<%= request.getAttribute("g2lastName") %>"></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Home Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2area SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2area");>-<INPUT TYPE=TEXT NAME=g2phone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2phone1");>-<INPUT TYPE=TEXT NAME=g2phone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g2phone2");></TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Work Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2warea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2warea");>-<INPUT TYPE=TEXT NAME=g2wphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2wphone1");>-<INPUT TYPE=TEXT NAME=g2wphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g2wphone2");> &nbsp; </TD></TR>
 <TR><TD ALIGN=RIGHT CLASS=tdcell><B>Cell Phone:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2marea SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2marea");>-<INPUT TYPE=TEXT NAME=g2mphone1 SIZE=3 MAXLENGTH=3 VALUE="" onkeyup=Phone("g2mphone1");>-<INPUT TYPE=TEXT NAME=g2mphone2 SIZE=4 MAXLENGTH=4 VALUE="" onkeyup=Phone("g2mphone2");></TD></TR>
-<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2emailAddress SIZE=30 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Relationship:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=g2role>
+<TR><TD ALIGN=RIGHT WIDTH=300 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>E-mail:</B></TD><TD ALIGN=LEFT CLASS=tdcell><INPUT TYPE=TEXT NAME=g2emailAddress SIZE=30 VALUE="<%= request.getAttribute("g2emailAddress") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Relationship:</B> </TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=g2role VALUE="<%= request.getAttribute("g2role") %>">
 <OPTION VALUE="CHOOSE">CHOOSE
 <OPTION VALUE="Mother">Mother
 <OPTION VALUE="Father">Father
@@ -300,7 +301,7 @@ FONT {
 <P>
 <TABLE WIDTH=600>
 <TR><TD ALIGN=RIGHT width=310 CLASS=tdcell><FONT COLOR=DD0000>*</FONT><B>Number of Seasons Played: </B></TD><TD ALIGN=LEFT CLASS=tdcell><SELECT NAME=seasons>
-<OPTION VALUE="0" SELECTED>0
+<OPTION VALUE="0">0
 <OPTION VALUE="1">1
 <OPTION VALUE="2">2
 <OPTION VALUE="3">3
@@ -402,8 +403,8 @@ FONT {
 <OPTION VALUE="Youth">Youth
 <OPTION VALUE="Adult">Adult
 </SELECT></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Jersey # First Choice: </B></TD><TD CLASS=tdcell><INPUT TYPE=TEXT NAME=jersey1 SIZE=3 MAXLENGTH=3 VALUE=""></TD></TR>
-<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Jersey # Second Choice: </B></TD><TD CLASS=tdcell><INPUT TYPE=TEXT NAME=jersey2 SIZE=3 MAXLENGTH=3 VALUE=""></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Jersey # First Choice: </B></TD><TD CLASS=tdcell><INPUT TYPE=TEXT NAME=jersey1 SIZE=3 MAXLENGTH=3 VALUE="<%= request.getAttribute("jersey1") %>"></TD></TR>
+<TR><TD ALIGN=RIGHT CLASS=tdcell><B>Jersey # Second Choice: </B></TD><TD CLASS=tdcell><INPUT TYPE=TEXT NAME=jersey2 SIZE=3 MAXLENGTH=3 VALUE="<%= request.getAttribute("jersey2") %>"></TD></TR>
 </TABLE><P>
 <TABLE>
 </TABLE><P>
@@ -477,7 +478,7 @@ FONT {
 <P>
 <CENTER><IMG SRC=https://www.youthleaguesusa.com/pryaa/2013/pics/ylusa.gif alt="Applications powered by GroupNet Solutions">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <A><IMG SRC=https://www.youthleaguesusa.com/pryaa/2013/pics/privacy.gif onClick=Privacy(); alt="Privacy Policy" border=0></A></CENTER>
 <P>
-<input type="hidden" name="registration" value="new">
+<input type="hidden" name="registration" value="update">
 <center><input type="submit" value="Submit Registration Information"></center>
 </form>
 
