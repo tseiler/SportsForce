@@ -193,8 +193,8 @@ public class RegistrationController extends HttpServlet {
 		double donation = 0.00;
 		double fundraisingFee = 0.00;
 		String hatSize = request.getParameter("hatSize");
-		int jersey1 = Integer.parseInt(request.getParameter("jersey1"));
-		int jersey2 = Integer.parseInt(request.getParameter("jersey2"));
+		int jersey1;
+		int jersey2;
 		String jerseySize = request.getParameter("jerseySize");
 		double lateFee = 0.00;
 		boolean liabilityWaiver = Boolean.parseBoolean(request.getParameter("liability"));
@@ -214,12 +214,25 @@ public class RegistrationController extends HttpServlet {
 		// Used to display donation values in dollar currency
 		DecimalFormat d = new DecimalFormat("'$'0.00");
 		
-		// Handle Other donation values
+		/*
+		 *  Handle Other donation values
+		 *  @author Adrian Robinson
+		 */
 		if (request.getParameter("donation").matches("other"))
 			donation = Double.parseDouble(request.getParameter("dother"));
 		else
 			donation = Double.parseDouble(request.getParameter("donation"));
 
+		if (!request.getParameter("jersey1").isEmpty())
+			jersey1 = Integer.parseInt(request.getParameter("jersey1"));
+		else
+			jersey1 = -1;
+		
+		if (!request.getParameter("jersey2").isEmpty())
+			jersey2 = Integer.parseInt(request.getParameter("jersey2"));
+		else
+			jersey2 = -1;
+		
 		
 		/*
 		 *  Convert birthDate String to Java Date
@@ -353,12 +366,13 @@ public class RegistrationController extends HttpServlet {
 				
 				
 		/*
-		 *  Create guardian 1
+		 *  Create guardian 1 and 2
 		 *  Add form data to guardian 1 object
 		 *  @author Adrian Robinson
 		 */
 		
 		Person p1 = new Person();
+		Person p2 = new Person();
 				
 		p1.setFirstName(g1firstName);
 		p1.setLastName(g1lastName);
@@ -377,37 +391,41 @@ public class RegistrationController extends HttpServlet {
 		else
 			p1.setGender("Other");
 		
-		/*
-		 *  Create guardian 2
-		 *  Add form data to guardian 2 object
-		 *  @author Adrian Robinson
-		 */
-		Person p2 = new Person();
-		
-		// Add form data to guardian 2 object
-		p2.setFirstName(g2firstName);
-		p2.setLastName(g2lastName);		
-		p2.setRole(g2role);
-		p2.setWorkPhone(g2workPhone);
-		p2.setHomePhone(g2homePhone);
-		p2.setMobilePhone(g2mobilePhone);
-		p2.setEmailAddress(g2emailAddress);
+		// Add guardian 1 to the player object
+				p0.addEmergencyContact(p1);
 		
 		/*
-		 *  Set correct contact gender if Parent, use "Other" for Guardian
+		 *  Add form data to guardian 2 object, if any
 		 *  @author Adrian Robinson
 		 */
 		
-		if (g2role.matches("Father"))
-			p2.setGender("Male");
-		else if (g2role.matches("Mother"))
-			p2.setGender("Female");
-		else
-			p2.setGender("Other");
-		
-		// Add guardian 1 and 2 to the player object
-		p0.addEmergencyContact(p1);
-		p0.addEmergencyContact(p2);
+		if (g2firstName.isEmpty()) {
+			
+			
+			// Add form data to guardian 2 object
+			p2.setFirstName(g2firstName);
+			p2.setLastName(g2lastName);		
+			p2.setRole(g2role);
+			p2.setWorkPhone(g2workPhone);
+			p2.setHomePhone(g2homePhone);
+			p2.setMobilePhone(g2mobilePhone);
+			p2.setEmailAddress(g2emailAddress);
+			
+			/*
+			 *  Set correct contact gender if Parent, use "Other" for Guardian
+			 *  @author Adrian Robinson
+			 */
+			
+			if (g2role.matches("Father"))
+				p2.setGender("Male");
+			else if (g2role.matches("Mother"))
+				p2.setGender("Female");
+			else
+				p2.setGender("Other");
+			
+			// Add guardian 2 to the player object
+			p0.addEmergencyContact(p2);
+		}		
 		
 		// Add the player object to the registration object
 		pr0.setPerson(p0);

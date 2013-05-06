@@ -5,7 +5,297 @@
 
 <html>
 <head>
-<title>Player Registration</title>
+
+<script>
+<!-- Form validation code by Adrian Robinson --> 
+var submitcount=0;
+var emailcount = 0;
+var errors = "";
+var efocus = "";
+
+function IsNumber(TestString) {
+	checknum = "1234567890";
+
+	for (i=0; i < TestString.length; i++) {
+		temp = TestString.substring (i, i+1);
+		if (checknum.indexOf (temp, 0) ==-1)
+			return (false);
+		}
+	return (true);
+	}
+
+
+function validateForm()
+{
+	var x=document.forms["Reg"]["pfirstName"].value;
+	if (x==null || x=="")
+		{
+		errors = errors + "* You must enter the Player's First Name.\n";
+		
+		}
+	if(document.Reg.plastName.value.length == 0) {
+		errors = errors + "* You must enter the Player's Last Name.\n";
+		if (efocus == "") { efocus = "plastName"; }
+	}
+	
+	if (document.Reg.gender.options.selectedIndex == 0) {
+		errors = errors + "* You must select the Player's Gender.\n";
+		if (efocus == "") { efocus = "gender"; }
+	}
+	if (document.Reg.month.options.selectedIndex==0) {
+		errors = errors + "* You must select the month for the Player's Birth Date.\n";
+		if (efocus == "") { efocus = "month"; }
+	}
+	if (document.Reg.day.options.selectedIndex==0) {
+		errors = errors + "* You must select the day for the Player's Birth Date.\n";
+		if (efocus == "") { efocus = "day"; }
+	}
+	if (document.Reg.year.options.selectedIndex==0) {
+		errors = errors + "* You must select the year for the Player's Birth Date.\n";
+		if (efocus == "") { efocus = "year"; }
+	}
+	if ((document.Reg.day.options.selectedIndex==31)&&((document.Reg.month.options.selectedIndex==2)||(document.Reg.month.options.selectedIndex==4)||(document.Reg.month.options.selectedIndex==6)||(document.Reg.month.options.selectedIndex==9)||(document.Reg.month.options.selectedIndex==11))) {
+		errors = errors + "* You must select a day lower than 31.\n";
+		if (efocus == "") { efocus = "day"; }
+	}
+	if ((document.Reg.day.options.selectedIndex==30)&&(document.Reg.month.options.selectedIndex==2)) {
+		errors = errors + "* You must select a day lower than 30.\n";
+		if (efocus == "") { efocus = "day"; }
+	}
+	var sindex = document.Reg.year.options.selectedIndex;
+	var tyear = document.Reg.year.options[sindex].value % 4;
+	if ((document.Reg.month.options.selectedIndex==2)&&((document.Reg.day.options.selectedIndex==29)&&(tyear > 0))) {
+		errors = errors + "* You must enter a valid date of birth. Only 28 days are in February " + document.Reg.year.options[sindex].value + ".\n";
+		if (efocus == "") { efocus = "day"; }
+	}
+
+	if((document.Reg.parea.value.length!=3)||(!IsNumber(document.Reg.parea.value))) {
+		errors = errors + "* You must enter a valid Home Phone Number including an Area Code.\n";
+		if (efocus == "") { efocus = "parea"; }
+	} else if((document.Reg.pphone1.value.length!=3)||(!IsNumber(document.Reg.pphone1.value))) {
+		errors = errors + "* You must enter a valid Home Phone Number including an Area Code.\n";
+		if (efocus == "") { efocus = "pphone1"; }
+	} else if((document.Reg.pphone2.value.length!=4)||(!IsNumber(document.Reg.pphone2.value))) {
+		errors = errors + "* You must enter a valid Home Phone Number including an Area Code.\n";
+		if (efocus == "") { efocus = "pphone2"; }
+	}
+	
+	if(document.Reg.street.value.length == 0) {
+		errors = errors + "* You must enter the Player's Address.\n";
+		if (efocus == "") { efocus = "street"; }
+	}
+	if(document.Reg.city.value.length == 0) {
+		errors = errors + "* You must enter the Player's City.\n";
+		if (efocus == "") { efocus = "city"; }
+	}
+	if(document.Reg.county.options.selectedIndex == 0) {
+		errors = errors + "* You must select the Player's County.\n";
+		if (efocus == "") { efocus = "county"; }
+	}
+	if(document.Reg.state.options.selectedIndex== 0) {
+		errors = errors + "* You must select the Player's State.\n";
+		if (efocus == "") { efocus = "state"; }
+	}
+	if((document.Reg.zipCode.value.length!=5)||(!IsNumber(document.Reg.zipCode.value))) {
+		errors = errors + "* You must enter a valid 5-digit Zip Code.\n";
+		if (efocus == "") { efocus = "zipCode"; }
+	}
+	
+	if(document.Reg.g1firstName.value == "") {
+		errors = errors + "* You must enter the Parent/Guardian #1's First Name.\n";
+		if (efocus == "") { efocus = "g1firstName"; }
+	}
+	if(document.Reg.g1lastName.value == "") {
+		errors = errors + "* You must enter the Parent/Guardian #1's Last Name.\n";
+		if (efocus == "") { efocus = "g1lastName"; }
+	}
+	if((document.Reg.g1area.value.length!=3)||(!IsNumber(document.Reg.g1area.value))) {
+		errors = errors + "* You must enter a Home Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1area"; }
+	} else if((document.Reg.g1phone1.value.length!=3)||(!IsNumber(document.Reg.g1phone1.value))) {
+		errors = errors + "* You must enter a Home Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1phone1"; }
+	} else if((document.Reg.g1phone2.value.length!=4)||(!IsNumber(document.Reg.g1phone2.value))) {
+		errors = errors + "* You must enter a Home Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1phone2"; }
+	}
+	
+	if ((document.Reg.g1warea.value.length>0)&&((document.Reg.g1warea.value.length!=3)||(!IsNumber(document.Reg.g1warea.value)))) {
+		errors = errors + "* Please enter a valid Work Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1warea"; }
+	} else if((document.Reg.g1warea.value.length==0)&&((document.Reg.g1wphone1.value.length>0)||(document.Reg.g1wphone2.length>0))){
+		errors = errors + "* Please enter a valid Work Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1warea"; }
+	} else if ((document.Reg.g1wphone1.value.length>0)&&((document.Reg.g1wphone1.value.length!=3)||(!IsNumber(document.Reg.g1wphone1.value)))) {
+		errors = errors + "* Please enter a valid Work Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1wphone1"; }
+	} else if((document.Reg.g1wphone1.value.length==0)&&((document.Reg.g1warea.value.length>0)||(document.Reg.g1wphone2.length>0))){
+		errors = errors + "* Please enter a valid Work Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1wphone1"; }
+	} else if ((document.Reg.g1wphone2.value.length>0)&&((document.Reg.g1wphone2.value.length!=4)||(!IsNumber(document.Reg.g1wphone2.value)))) {
+		errors = errors + "* Please enter a valid valid Work Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1wphone2"; }
+	} else if((document.Reg.g1wphone2.value.length==0)&&((document.Reg.g1wphone1.value.length>0)||(document.Reg.g1warea.length>0))){
+		errors = errors + "* Please enter a valid Work Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1wphone2"; }
+	}
+	
+	if ((document.Reg.g1marea.value.length>0)&&((document.Reg.g1marea.value.length!=3)||(!IsNumber(document.Reg.g1marea.value)))) {
+		errors = errors + "* Please enter a valid Cell Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1marea"; }
+		}
+	else if((document.Reg.g1marea.value.length==0)&&((document.Reg.g1mphone1.value.length>0)||(document.Reg.g1mphone2.length>0))){
+		errors = errors + "* Please enter a valid Cell Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1marea"; }
+	} else if ((document.Reg.g1mphone1.value.length>0)&&((document.Reg.g1mphone1.value.length!=3)||(!IsNumber(document.Reg.g1mphone1.value)))) {
+		errors = errors + "* Please enter a valid Cell Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1mphone1"; }
+	} else if((document.Reg.g1mphone1.value.length==0)&&((document.Reg.g1marea.value.length>0)||(document.Reg.g1mphone2.length>0))){
+		errors = errors + "* Please enter a valid Cell Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1mphone1"; }
+	} else if ((document.Reg.g1mphone2.value.length>0)&&((document.Reg.g1mphone2.value.length!=4)||(!IsNumber(document.Reg.g1mphone2.value)))) {
+		errors = errors + "* Please enter a valid Cell Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1mphone2"; }
+	} else if((document.Reg.g1mphone2.value.length==0)&&((document.Reg.g1mphone1.value.length>0)||(document.Reg.g1marea.length>0))){
+		errors = errors + "* Please enter a valid Cell Phone Number including an Area Code for Parent/Guardian #1.\n";
+		if (efocus == "") { efocus = "g1mphone2"; }
+	}
+	
+	if (document.Reg.g1role.options.selectedIndex==0) {
+		errors = errors + "* You must select the Relationship of Parent/Guardian #1 to the Player.\n";
+		if (efocus == "") { efocus = "g1role"; }
+	}
+	
+	if((document.Reg.g2firstName.value.length==0)&&(document.Reg.g2lastName.value.length>0)) {
+		errors = errors + "* You must enter the First Name for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2firstName"; }
+	}
+	if((document.Reg.g2firstName.value.length>0)&&(document.Reg.g2lastName.value.length==0)) {
+		errors = errors + "* You must enter the Last Name for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2lastName"; }
+	}
+	if ((document.Reg.g2area.value.length>0)&&((document.Reg.g2area.value.length!=3)||(!IsNumber(document.Reg.g2area.value)))) {
+		errors = errors + "* You must enter a Home Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2area"; }
+	} else if((document.Reg.g2area.value.length==0)&&((document.Reg.g2phone1.value.length>0)||(document.Reg.g2phone2.length>0))){
+		errors = errors + "* You must enter a Home Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2area"; }
+	} else if ((document.Reg.g2phone1.value.length>0)&&((document.Reg.g2phone1.value.length!=3)||(!IsNumber(document.Reg.g2phone1.value)))) {
+		errors = errors + "* You must enter a Home Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2phone1"; }
+	} else if((document.Reg.g2phone1.value.length==0)&&((document.Reg.g2area.value.length>0)||(document.Reg.g2phone2.length>0))){
+		errors = errors + "* You must enter a Home Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2phone1"; }
+	} else if ((document.Reg.g2phone2.value.length>0)&&((document.Reg.g2phone2.value.length!=4)||(!IsNumber(document.Reg.g2phone2.value)))) {
+		errors = errors + "* You must enter a valid Home Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2phone2"; }
+	} else if((document.Reg.g2phone2.value.length==0)&&((document.Reg.g2phone1.value.length>0)||(document.Reg.g2area.length>0))){
+		errors = errors + "* You must enter a valid Home Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2phone2"; }
+	}
+	if ((document.Reg.g1warea.value.length>0)&&((document.Reg.g1warea.value.length!=3)||(!IsNumber(document.Reg.g1warea.value)))) {
+		errors = errors + "* You must enter a Work Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g1warea"; }
+	} else if((document.Reg.g1warea.value.length==0)&&((document.Reg.g1wphone1.value.length>0)||(document.Reg.g1wphone2.length>0))){
+		errors = errors + "* You must enter a Work Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g1warea"; }
+	} else if ((document.Reg.g1wphone1.value.length>0)&&((document.Reg.g1wphone1.value.length!=3)||(!IsNumber(document.Reg.g1wphone1.value)))) {
+		errors = errors + "* You must enter a Work Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g1wphone1"; }
+	} else if((document.Reg.g1wphone1.value.length==0)&&((document.Reg.g1warea.value.length>0)||(document.Reg.g1wphone2.length>0))){
+		errors = errors + "* You must enter a Work Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g1wphone1"; }
+	} else if ((document.Reg.g1wphone2.value.length>0)&&((document.Reg.g1wphone2.value.length!=4)||(!IsNumber(document.Reg.g1wphone2.value)))) {
+		errors = errors + "* You must enter a valid Work Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g1wphone2"; }
+	} else if((document.Reg.g1wphone2.value.length==0)&&((document.Reg.g1wphone1.value.length>0)||(document.Reg.g1warea.length>0))){
+		errors = errors + "* You must enter a Work Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g1wphone2"; }
+	} 
+	
+	if ((document.Reg.g2marea.value.length>0)&&((document.Reg.g2marea.value.length!=3)||(!IsNumber(document.Reg.g2marea.value)))) {
+		errors = errors + "* You must enter a Cell Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2marea"; }
+	} else if((document.Reg.g2marea.value.length==0)&&((document.Reg.g2mphone1.value.length>0)||(document.Reg.g2mphone2.length>0))){
+		errors = errors + "* You must enter a Cell Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2marea"; }
+	} else if ((document.Reg.g2mphone1.value.length>0)&&((document.Reg.g2mphone1.value.length!=3)||(!IsNumber(document.Reg.g2mphone1.value)))) {
+		errors = errors + "* You must enter a Cell Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2mphone1"; }
+	} else if((document.Reg.g2mphone1.value.length==0)&&((document.Reg.g2marea.value.length>0)||(document.Reg.g2mphone2.length>0))){
+		errors = errors + "* You must enter a Cell Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2mphone1"; }
+	} else if ((document.Reg.g2mphone2.value.length>0)&&((document.Reg.g2mphone2.value.length!=4)||(!IsNumber(document.Reg.g2mphone2.value)))) {
+		errors = errors + "* You must enter a valid Cell Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2mphone2"; }
+	} else if((document.Reg.g2mphone2.value.length==0)&&((document.Reg.g2mphone1.value.length>0)||(document.Reg.g2marea.length>0))){
+		errors = errors + "* You must enter a valid Cell Phone Number including an Area Code for Parent/Guardian #2.\n";
+		if (efocus == "") { efocus = "g2mphone2"; }
+	}
+
+	if ((document.Reg.g2role.options.selectedIndex==0)&&(document.Reg.g2firstName.value.length>0)) {
+		errors = errors + "* You must select the Relationship of Parent/Guardian #2 to the Player.\n";
+		if (efocus == "") { efocus = "g2role"; }	
+	}
+	
+	if (document.Reg.jerseySize.options.selectedIndex==0) {
+		errors = errors + "* You must select a Jersey Size.\n";
+		if (efocus == "") { efocus = "jerseySize"; }
+	}
+	
+	if (document.Reg.pantSize.options.selectedIndex==0) {
+		errors = errors + "* You must select a Pant Size.\n";
+		if (efocus == "") { efocus = "pantSize"; }
+	}
+	
+	if (document.Reg.socksSize.options.selectedIndex==0) {
+		errors = errors + "* You must select a Sock Size.\n";
+		if (efocus == "") { efocus = "socksSize"; }
+	}
+	
+	if (document.Reg.hatSize.options.selectedIndex==0) {
+		errors = errors + "* You must select a Hat Size.\n";
+		if (efocus == "") { efocus = "hatSize"; }
+	}
+
+	if(!document.Reg.liability.checked) {
+		errors = errors + "* You must read the Liability Waiver and check the box.\n";
+		if (efocus == "") { efocus = "liability"; }
+	}
+	if(!document.Reg.refundPolicy.checked) {
+		errors = errors + "* You must read the Refund Policy and check the box.\n";
+		if (efocus == "") { efocus = "refundPolicy"; }
+	}
+	if(!document.Reg.codeConduct.checked) {
+		errors = errors + "* You must read the Code of Conduct Policy and check the box.\n";
+		if (efocus == "") { efocus = "codeConduct"; }
+	}
+	if(!document.Reg.byLaws.checked) {
+		errors = errors + "* You must read the By-Laws disclosure and check the box.\n";
+		if (efocus == "") { efocus = "byLaws"; }
+	}
+	if(!document.Reg.photo.checked) {
+		errors = errors + "* You must read the Photo Waiver disclosure and check the box.\n";
+		if (efocus == "") { efocus = "photo"; }
+	}
+	
+	if (errors.length > 0)
+		{
+		var msg = "___________________________________________________________________________\n\nThe form was not submitted because of the following error(s).\nPlease correct these error(s) and re-submit.\n___________________________________________________________________________\n\n";
+		msg = msg + errors;
+		alert(msg);
+		msg = "";
+		errors = "";
+		return false;
+		}
+	else
+		{
+			return;
+		}
+	}
+</script>
+
+<title>Update Player Registration</title>
 <STYLE TYPE="text/css">
 BODY  {
 	color: black;
@@ -67,7 +357,7 @@ FONT {
 <P><BR>
 </CENTER>
 
-<form method="post" action="RegistrationController" name="Reg">
+<form method="post" action="RegistrationController" name="Reg" onsubmit="return validateForm()">
 
 <BLOCKQUOTE>
 <FONT SIZE=5 COLOR="0000CC"><B>I. PLAYER INFORMATION:</B></FONT>
