@@ -33,4 +33,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>team2_database.sql</name>
+			<type>1</type>
+			<location>C:/Users/Adrian/Dropbox/UGA/MIST 7570/Group/final/team2_database_creation.sql</location>
+		</link>
+	</linkedResources>
 </projectDescription>
